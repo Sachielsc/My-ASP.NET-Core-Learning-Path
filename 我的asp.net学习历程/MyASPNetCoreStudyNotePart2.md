@@ -205,6 +205,8 @@ TODO: Identity, IdentityServer, OpenIddict, Auth0/OIDC, OWASP top10
   - ASP.NET Core MVC or Razor Pages plus Blazor
 
 ## Razor Pages
+Razor is basically HTML with the option to embed C# code.
+
 Razor Pages can make coding page-focused scenarios easier and more productive than using controllers and views: [Official site](https://learn.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-7.0&tabs=visual-studio)
 
 [Tutorial: Get started with Razor Pages in ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/tutorials/razor-pages/razor-pages-start?view=aspnetcore-7.0&tabs=visual-studio)
@@ -212,5 +214,18 @@ Razor Pages can make coding page-focused scenarios easier and more productive th
 ## What is SignalR?
 SignalR enables developers to build real-time web applications and add real-time functionalities to existing applications. SignalR simplifies the process of establishing bi-directional communication between a server and multiple clients, allowing real-time updates and notifications to be pushed from the server to the connected clients.
 
+## what is IIS
+IIS stands for Internet Information Services. It is a web server software developed by Microsoft and is included with the Windows operating system. IIS provides a platform for hosting and serving websites, web applications, and other web services on the Windows server environment.
 
+IIS supports various web protocols such as HTTP, HTTPS, FTP, SMTP, and NNTP, allowing it to handle different types of web-based content and services. It offers features like process isolation, security, load balancing, and application pool management to ensure efficient and reliable web hosting.
 
+With IIS, you can deploy and manage websites and web applications built on different technologies such as ASP.NET, PHP, and static HTML. It also supports integration with other Microsoft technologies like SQL Server and Active Directory for enhanced functionality and authentication.
+
+IIS provides a web-based management console, called Internet Information Services (IIS) Manager, which allows administrators to configure and monitor websites, application pools, security settings, and other server-related aspects.
+
+Overall, IIS is a widely used web server software that powers many websites and web applications running on the Windows platform.
+
+## Pluralsight ASP.NET Core 6 Web API Path and other Pluralsight tutorials
+记录：已经学完的视频：
+- ASP.NET Core 6: Big Picture (by Roland Guijt) - chapter 1 & 2
+- ASP.NET Core 6 Web API Fundamentals (by Kevin Dockx)
