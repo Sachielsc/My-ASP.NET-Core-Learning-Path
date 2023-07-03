@@ -228,5 +228,5 @@ Overall, IIS is a widely used web server software that powers many websites and 
 ## Pluralsight ASP.NET Core 6 Web API Path and other Pluralsight tutorials
 记录：已经学完的视频：
 - ASP.NET Core 6: Big Picture (by Roland Guijt) - chapter 1 & 2
-- ASP.NET Core 6 Web API Fundamentals (by Kevin Dockx) - Learning now [Link Text](./ASP.NET%20Core%206%20Web%20API%20Fundamentals%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md)
+- [ASP.NET Core 6 Web API Fundamentals (by Kevin Dockx)](https://app.pluralsight.com/course-player?clipId=ff09197b-954c-4a08-a5d9-83d3c17b17e0) - Learning progress here: [Link Text](./ASP.NET%20Core%206%20Web%20API%20Fundamentals%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md)
 

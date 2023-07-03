@@ -18,8 +18,15 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthorization();
+// This is the asp.net core 6 way:
+//app.UseAuthorization();
+//app.MapControllers();
 
-app.MapControllers();
+// This is the asp.net core 5 way:
+app.UseRouting();
+app.UseAuthorization();
+app.UseEndpoints(endpoints => {
+    endpoints.MapControllers();
+});
 
 app.Run();
