@@ -7,23 +7,18 @@ namespace DemoWebApiProject.Controllers
     public class GameProgressDemoController : ControllerBase
     {
         [HttpGet]
-        public JsonResult GetGameProgress()
+        public JsonResult GetAllGameProgresses()
         {
-            return new JsonResult (
-                new List<object> {
-                    new {
-                        id = 1,
-                        Name = "心灵终结 Mental Omega",
-                        ChineseName = "心灵终结",
-                        EnglishName = "Mental Omega"
-                    },
-                    new {
-                        id = 2,
-                        Name = "tormented souls",
-                        ChineseName = "折磨之魂",
-                        EnglishName = "tormented souls"
-                    },
-                }
+            return new JsonResult (GameProgressDataStore.Instance.GameProgresses);
+        }
+
+        [HttpGet("{id}")]
+        public JsonResult GetASpecificGameProgress(int id)
+        {
+            return new JsonResult(
+                GameProgressDataStore.Instance.GameProgresses.FirstOrDefault(
+                    c => c.Id == id
+                    )
                 );
         }
     }
