@@ -230,3 +230,48 @@ Overall, IIS is a widely used web server software that powers many websites and 
 - ASP.NET Core 6: Big Picture (by Roland Guijt) - chapter 1 & 2
 - [ASP.NET Core 6 Web API Fundamentals (by Kevin Dockx)](https://app.pluralsight.com/course-player?clipId=ff09197b-954c-4a08-a5d9-83d3c17b17e0) - Learning progress here: [Link Text](./ASP.NET%20Core%206%20Web%20API%20Fundamentals%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md)
 
+# SOLID
+## What is SOLID?
+It is five OOP principles, the first letter of each spelling out SOLID:
+- Single Responsibility Principle (SRP)
+- Open-Closed Principle (OCP)
+- Liskov Substitution Principle (LSP)
+- Interface Segregation Principle (ISP)
+- Dependency Inversion Principle (DIP)
+
+## Single Responsibility Principle (SRP)
+The Single Responsibility Principle (SRP) states that a class should do one thing and one thing only.</br>
+Doing lots of things in a class is bad not just because it is difficult to unit test, but it increases the odds of introducing bugs.</br>
+Very good article [here](https://www.dotnetcurry.com/software-gardening/1148/solid-single-responsibility-principle)
+
+## Open-Closed Principle (OCP)
+Very good article [here](https://www.dotnetcurry.com/software-gardening/1176/solid-open-closed-principle)
+- Closed for Modification</br>
+In a nutshell, being closed for modification means you shouldn’t change the behavior of existing code.</br>
+There are however, three ways you could change the behavior of existing code.</br>
+The first is to fix a bug. After all, the code is not functioning properly and should be fixed. You need to be careful here as clients of the class may know about this bug and have taken steps to get around this. As an example, HP had a bug in some of their printer drivers for many years. This bug caused printing errors under Windows, and HP refused to change it. Microsoft made changes in Word and other applications to get around this bug.</br>
+The second reason to modify existing code is to refactor the code so that it follows the other SOLID principles. For example, the code may be working perfectly but does too much, so you wish to refactor it to follow Single Responsibility.</br>
+Finally, a third way, which is somewhat controversial, is you are allowed to change the code if it doesn’t change the need for clients to change. You have to be careful here so that you don’t introduce bugs that affect the client. Good unit testing is critical.
+- Open for Extension</br>
+Using this solution, you inherit a class and all its behavior then override methods where you want to change. This avoids changing the original code and allows the class to do something different.</br>
+Anyone that has tried to do much implementation inheritance knows it has many pitfalls. Because of this many people have adopted the practice interface inheritance. Using this methodology, only method signatures are defined and the code for each method must be created each time the interface is implemented. That’s the down side. However, the upside is greater and allows you to easily substitute one behavior for another. The common example is a logging class based on an ILogger interface. You then implement the class to log to the Windows Event Log or a text file. The client doesn’t know which implementation it’s using nor does it care.</br>
+Another way to have a method open for extension is through abstract methods. When inherited, an abstract method must be overridden. In other words, you are required to provide some type of functionality.</br>
+Closely related to an abstract method is a virtual method. The difference is where you must override the abstract method; you are not required to override a virtual method. This allows a bit more flexibility to you as a developer.</br>
+There is one other, and often overlooked, way to provide additional functionality. That is the extension method. While it doesn’t change the behavior of a method, it does allow you extend the functionality of a class without changing the original class code.
+
+## Liskov Substitution Principle (LSP)
+Very good article [here](https://www.dotnetcurry.com/software-gardening/1235/liskov-substitution-principle-lsp-solid-patterns)</br>
+A subclass (Dog or Bird) can be substituted for the base class (Animal) and everything still works.
+
+## Interface Segregation Principle (ISP)
+Very good article [here](https://www.dotnetcurry.com/software-gardening/1257/interface-segregation-principle-isp-solid-principle)</br>
+
+## Dependency Inversion Principle (DIP)
+Very good article [here](https://www.dotnetcurry.com/software-gardening/1284/dependency-injection-solid-principles)</br>
+This is about Dependency Injection (DI)
+
+## What is loose coupling in software development
+In software development, loose coupling is a design principle that aims to reduce the dependencies between components or modules of a system. It promotes a more flexible and maintainable codebase by minimizing the direct interactions and knowledge that one component has about another.
+
+To achieve loose coupling, software developers employ techniques such as using dependency injection, interfaces, abstract classes, and design patterns like the Dependency Inversion Principle (DIP) and the Observer pattern. These practices help to decouple components, enabling greater flexibility, maintainability, and extensibility of software systems.
+
