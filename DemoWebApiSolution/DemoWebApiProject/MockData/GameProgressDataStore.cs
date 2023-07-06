@@ -1,6 +1,6 @@
 ﻿using DemoWebApiProject.Models;
 
-namespace DemoWebApiProject
+namespace DemoWebApiProject.MockData
 {
     public class GameProgressDataStore
     {
@@ -24,7 +24,7 @@ namespace DemoWebApiProject
                     Id = 2,
                     Name = "tormented souls",
                     ChineseName = "折磨之魂",
-                    GameProgressOnPlatformDtos = new List<GameProgressOnPlatformDto>()
+                    GameProgressOnPlatforms = new List<GameProgressOnPlatformDto>()
                     {
                         new GameProgressOnPlatformDto() {
                             Platform = "PC",

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DemoWebApiProject.MockData;
+using DemoWebApiProject.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace DemoWebApiProject.Controllers
 {
@@ -7,19 +9,42 @@ namespace DemoWebApiProject.Controllers
     public class GameProgressDemoController : ControllerBase
     {
         [HttpGet]
-        public JsonResult GetAllGameProgresses()
+        public ActionResult<IEnumerable<GameProgressDto>> GetAllGameProgresses()
         {
-            return new JsonResult (GameProgressDataStore.Instance.GameProgresses);
+            return Ok(GameProgressDataStore.Instance.GameProgresses);
         }
 
         [HttpGet("{id}")]
-        public JsonResult GetASpecificGameProgress(int id)
+        public ActionResult<GameProgressDto> GetASpecificGameProgress(int id)
         {
-            return new JsonResult(
-                GameProgressDataStore.Instance.GameProgresses.FirstOrDefault(
-                    c => c.Id == id
-                    )
+            var gameProgressToReturn = GameProgressDataStore.Instance.GameProgresses.FirstOrDefault(
+                c => c.Id == id
                 );
+            if (gameProgressToReturn == null) { return NotFound(); }
+            else return Ok(gameProgressToReturn);
+        }
+
+        [HttpGet("{id}/gameprogressesonplatform")]
+        public ActionResult<IEnumerable<GameProgressOnPlatformDto>> GetAllGameProgressesOfASpecificGame(int id)
+        {
+            var gameProgressToReturn = GameProgressDataStore.Instance.GameProgresses.FirstOrDefault(
+                c => c.Id == id
+                );
+            if (gameProgressToReturn == null) { return NotFound(); }
+            else return Ok(gameProgressToReturn.GameProgressOnPlatforms);
+        }
+
+        [HttpGet("{id}/gameprogressesonplatform/{platformName}")]
+        public ActionResult<GameProgressOnPlatformDto> GetASpecificGameProgressOfASpecificGame(int id, string platformName)
+        {
+            var gameProgressToReturn = GameProgressDataStore.Instance.GameProgresses.FirstOrDefault( c => c.Id == id );
+            if (gameProgressToReturn == null) { return NotFound(); }
+            else {
+                var gameProgressOnPlatformToReturn = gameProgressToReturn.GameProgressOnPlatforms.FirstOrDefault(c => c.Platform == platformName);
+                if (gameProgressOnPlatformToReturn == null) { return NotFound(); }
+                else
+                    return gameProgressOnPlatformToReturn;
+            }
         }
     }
 }
