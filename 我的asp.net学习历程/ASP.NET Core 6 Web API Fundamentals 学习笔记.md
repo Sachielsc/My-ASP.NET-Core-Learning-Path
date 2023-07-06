@@ -44,3 +44,19 @@ Let's break down the code and explain each part:
   - `c.Id == cityId` is the condition that is evaluated for each element `c`. It checks whether the `Id` property of the city object `c` is equal to the specified `cityId` value.
 
 In summary, the purpose of the arrow function in this code is to define a condition that filters the `someCityCollection` collection. The `FirstOrDefault` method uses this condition to find the first city object whose `Id` property matches the specified `cityId`. If a match is found, the `city` variable will contain the reference to that city object. If no matching element is found, the `city` variable will be assigned `null`.
+
+## Using `public ICollection<T> Objects { get; set; } = new List<T>()` instead of `public List<T> Objects { get; set; } = new List<T>()` provides several advantages in terms of flexibility and code maintainability, why?
+
+Here are a few reasons why using `ICollection<T>` is preferred:
+
+1. **Encapsulation and Abstraction**: By exposing the `Objects` property as `ICollection<T>`, you are using an interface that represents a generic collection. This promotes encapsulation and abstraction, allowing you to easily switch between different implementations of `ICollection<T>` without affecting the consumers of the class. It also decouples the class from specific implementation details and allows for more flexible code.
+
+2. **Flexibility and Polymorphism**: Declaring the property as `ICollection<T>` allows you to assign any collection that implements the `ICollection<T>` interface. This means you can assign different types of collections (e.g., `List<T>`, `HashSet<T>`, etc.) to the `Objects` property without modifying the consuming code. This flexibility allows you to take advantage of different collection types based on your specific needs.
+
+3. **API Design**: Using `ICollection<T>` instead of `List<T>` conveys the intention that the property is a collection, but the specific implementation is not important. It communicates to the consumers of the class that they can expect a collection without depending on a particular implementation or assuming specific features of `List<T>`. This helps to keep the API clean and avoids exposing unnecessary implementation details.
+
+4. **Loose Coupling**: By depending on an interface (`ICollection<T>`) instead of a concrete type (`List<T>`), you reduce the coupling between components. This makes it easier to change or extend the implementation in the future without affecting the code that relies on it. It promotes good coding practices like the Dependency Inversion Principle and allows for better maintainability.
+
+5. **Testing and Mocking**: When writing unit tests, it's often helpful to mock dependencies. Using an interface like `ICollection<T>` allows you to easily create mock implementations for testing scenarios without being tied to the specific behavior of `List<T>`. This improves testability and makes it easier to isolate the behavior being tested.
+
+In summary, using `public ICollection<T> Objects { get; set; } = new List<T>()` instead of `public List<T> Objects { get; set; } = new List<T>()` provides greater flexibility, promotes abstraction, improves code maintainability, and enables loose coupling between components.
