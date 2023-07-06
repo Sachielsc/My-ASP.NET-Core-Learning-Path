@@ -37,9 +37,10 @@ namespace DemoWebApiProject.Controllers
         [HttpGet("{id}/gameprogressesonplatform/{platformName}")]
         public ActionResult<GameProgressOnPlatformDto> GetASpecificGameProgressOfASpecificGame(int id, string platformName)
         {
-            var gameProgressToReturn = GameProgressDataStore.Instance.GameProgresses.FirstOrDefault( c => c.Id == id );
+            var gameProgressToReturn = GameProgressDataStore.Instance.GameProgresses.FirstOrDefault(c => c.Id == id);
             if (gameProgressToReturn == null) { return NotFound(); }
-            else {
+            else
+            {
                 var gameProgressOnPlatformToReturn = gameProgressToReturn.GameProgressOnPlatforms.FirstOrDefault(c => c.Platform == platformName);
                 if (gameProgressOnPlatformToReturn == null) { return NotFound(); }
                 else

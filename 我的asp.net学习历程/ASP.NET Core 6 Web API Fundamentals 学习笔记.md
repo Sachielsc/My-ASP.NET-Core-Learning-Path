@@ -9,6 +9,11 @@ Routing matches a request URI to an action on a controller
 # Misc
 ## Some dev hints
 - If we've worked with collections before, you will know that it is a good idea to always initialize them to an empty collection instead of leaving them null, as to avoid null reference issues 
+- we will have the following error when two controller methods are pointing to the same endpoint location:
+  ```
+  Fetch error
+  response status is 500 https://localhost:7066/swagger/v1/swagger.json
+  ```
 
 ## About class properties
 - { get; set; }:<br>

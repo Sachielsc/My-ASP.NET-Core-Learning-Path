@@ -2,9 +2,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers(options => {
-    options.ReturnHttpNotAcceptable = true;
-}).AddXmlDataContractSerializerFormatters(); // Demo: Formatters and Content negotiation
+builder.Services.AddControllers().AddXmlDataContractSerializerFormatters(); // Demo: Formatters and Content negotiation
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -28,7 +26,8 @@ app.UseHttpsRedirection();
 // This is the asp.net core 5 way:
 app.UseRouting();
 app.UseAuthorization();
-app.UseEndpoints(endpoints => {
+app.UseEndpoints(endpoints =>
+{
     endpoints.MapControllers();
 });
 
