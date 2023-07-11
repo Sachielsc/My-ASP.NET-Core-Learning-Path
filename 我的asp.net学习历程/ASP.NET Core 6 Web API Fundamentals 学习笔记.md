@@ -69,3 +69,28 @@ Here are a few reasons why using `ICollection<T>` is preferred:
 5. **Testing and Mocking**: When writing unit tests, it's often helpful to mock dependencies. Using an interface like `ICollection<T>` allows you to easily create mock implementations for testing scenarios without being tied to the specific behavior of `List<T>`. This improves testability and makes it easier to isolate the behavior being tested.
 
 In summary, using `public ICollection<T> Objects { get; set; } = new List<T>()` instead of `public List<T> Objects { get; set; } = new List<T>()` provides greater flexibility, promotes abstraction, improves code maintainability, and enables loose coupling between components.
+
+## What is singleton?
+The term "singleton" typically refers to a design pattern in software engineering. It is a creational design pattern that restricts the instantiation of a class to a single object. In other words, a singleton class ensures that only one instance of the class can exist at any given time.
+
+Here are some key characteristics of a singleton class:
+
+1. Single Instance: A singleton class allows only one instance of itself to be created.
+2. Global Access: The single instance is globally accessible, meaning that it can be accessed from anywhere within the codebase.
+3. Lazy Initialization: The singleton instance is usually created only when it is first requested, rather than being created upfront.
+
+Singletons are often used in scenarios where there should be a single point of access to a resource or when there is a need to coordinate actions across a system. For example, a logging service, database connection, or configuration manager might be implemented as a singleton to ensure that there is only one instance handling the resource.
+
+It's worth noting that the use of singletons has been a topic of debate in software engineering due to potential issues with testability, tight coupling, and potential concurrency problems. Therefore, it's important to consider the specific requirements and implications before implementing a singleton pattern in your codebase.
+
+## What is null-coalescing operator
+In C#, the "??", also known as the null-coalescing operator, is used for null checking and provides a concise way to assign a default value when a nullable reference type is null.
+
+Here's how it works:
+
+```csharp
+T result = nullableValue ?? defaultValue;
+```
+
+In the above code snippet, `nullableValue` is a nullable reference type, and `defaultValue` is a value that will be assigned to `result` if `nullableValue` is null. The null-coalescing operator checks if `nullableValue` is null. If it is null, the operator assigns `defaultValue` to `result`; otherwise, it assigns the value of `nullableValue` to `result`.
+
