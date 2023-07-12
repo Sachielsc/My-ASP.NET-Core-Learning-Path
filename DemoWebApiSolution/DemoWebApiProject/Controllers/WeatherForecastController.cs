@@ -1,5 +1,8 @@
 using DemoWebApiProject.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
+using Microsoft.AspNetCore.Mvc.Routing;
+using System;
 
 namespace DemoWebApiProject.Controllers
 {
@@ -24,18 +27,18 @@ namespace DemoWebApiProject.Controllers
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
             _logger = logger;
+            _logger.Log(LogLevel.Information, "Start testing one of the weather controllers ... \nThis weather controller has nothing to do with my game progress demo ... ");
         }
 
         [HttpGet(Name = "GetWeatherForecastInObjectFormat")]
         public IEnumerable<WeatherForecastDto> Get() => dummyReturn;
 
         [HttpGet("getWeatherForecastInJsonFormat", Name = "GetWeatherForecastInJsonFormat")]
-        public ActionResult<IEnumerable<WeatherForecastDto>> GetWeatherForecast() => Ok(dummyReturn);
-
-        [HttpGet("getWeatherForecastAndTestLogger")]
-        public ActionResult<IEnumerable<WeatherForecastDto>> GetWeatherForecastAndTestLogger()
+        public ActionResult<IEnumerable<WeatherForecastDto>> GetWeatherForecast()
         {
-            _logger.Log(LogLevel.Information, "This weather controller has nothing to do with my game progress demo ... ");
+            var methodInfo = typeof(WeatherForecastController).GetMethod("GetWeatherForecast");
+            string methodName = (methodInfo == null) ? "N/A" : methodInfo.Name;
+            _logger.Log(LogLevel.Information, "Playing around the method info here. Method name: \"" + methodName + "\"");
             return Ok(dummyReturn);
         }
     }

@@ -1,6 +1,6 @@
 # Links
 - [Click here to the roadmap site](https://github.com/MoienTajik/AspNetCore-Developer-Roadmap)
-- [学习进度](https://github.com/MoienTajik/AspNetCore-Developer-Roadmap)
+- [学习进度](https://app.pluralsight.com/course-player?clipId=e5661b60-7bfe-4fa3-be3c-0803306186fb)
 
 # Basic knowledge
 ## Rounting

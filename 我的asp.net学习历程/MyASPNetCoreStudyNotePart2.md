@@ -268,10 +268,19 @@ Very good article [here](https://www.dotnetcurry.com/software-gardening/1257/int
 
 ## Dependency Inversion Principle (DIP)
 Very good article [here](https://www.dotnetcurry.com/software-gardening/1284/dependency-injection-solid-principles)</br>
-This is about Dependency Injection (DI)
+This is about Dependency Inversion, or as it is commonly called, Dependency Injection (DI).
+-  Using DI makes it easy to change out the implementation of that interface that has been injected and easy to unit test original method
 
 ## What is loose coupling in software development
 In software development, loose coupling is a design principle that aims to reduce the dependencies between components or modules of a system. It promotes a more flexible and maintainable codebase by minimizing the direct interactions and knowledge that one component has about another.
 
 To achieve loose coupling, software developers employ techniques such as using dependency injection, interfaces, abstract classes, and design patterns like the Dependency Inversion Principle (DIP) and the Observer pattern. These practices help to decouple components, enabling greater flexibility, maintainability, and extensibility of software systems.
 
+# What are IoC containers
+IoC (Inversion of Control) containers are software frameworks or libraries that implement the Inversion of Control principle in software development. Inversion of Control is a design pattern that helps decouple the dependencies between components or classes in an application. It allows for the inversion of the flow of control from the application code to an external container, which manages the creation and resolution of object dependencies.
+
+IoC containers achieve this by providing a centralized mechanism for managing the lifecycle and dependencies of objects. They typically offer features such as dependency injection, automatic object creation, and object configuration. By using an IoC container, developers can define the dependencies of their classes or components in a configuration file or through annotations, and the container takes care of resolving and injecting those dependencies at runtime.
+
+The IoC principle helps improve modularity, testability, and maintainability of software systems by reducing the coupling between components and promoting loose coupling and separation of concerns.
+
+IoC stands for Inversion of Control, which is the underlying concept behind IoC containers.
