@@ -1,17 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc.Controllers;
-using Microsoft.AspNetCore.Mvc.Routing;
-using Microsoft.AspNetCore.Mvc;
-
-namespace DemoWebApiProject.Utilities
+﻿namespace DemoWebApiProject.Utilities
 {
-    public class ControllerHelper : ControllerBase
+    public static class ControllerHelper
     {
-        public string GetHttpMethodAttribute(Type controllerType, string methodName)
-        {
-            ControllerActionDescriptor actionDescriptor = (ControllerActionDescriptor)ControllerContext.ActionDescriptor;
-            var httpMethodAttribute = actionDescriptor.MethodInfo.GetCustomAttributes(typeof(HttpMethodAttribute), true).FirstOrDefault() as HttpMethodAttribute;
-
-            return httpMethodAttribute?.HttpMethods.FirstOrDefault() ?? "N/A";
-        }
+        public static string ControllerHelperDemoMethod(int input1, int input2) => (input1 + input2).ToString();
     }
 }

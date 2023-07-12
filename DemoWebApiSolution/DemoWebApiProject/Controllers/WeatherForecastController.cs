@@ -1,8 +1,6 @@
 using DemoWebApiProject.Models;
+using DemoWebApiProject.Utilities;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Controllers;
-using Microsoft.AspNetCore.Mvc.Routing;
-using System;
 
 namespace DemoWebApiProject.Controllers
 {
@@ -38,7 +36,8 @@ namespace DemoWebApiProject.Controllers
         {
             var methodInfo = typeof(WeatherForecastController).GetMethod("GetWeatherForecast");
             string methodName = (methodInfo == null) ? "N/A" : methodInfo.Name;
-            _logger.Log(LogLevel.Information, "Playing around the method info here. Method name: \"" + methodName + "\"");
+            _logger.Log(LogLevel.Information, "Playing around the method info here. Method name: \"" + methodName + "\"\nLog more method information: " + methodInfo?.ToString());
+            _logger.Log(LogLevel.Information, "Playing around the helper class: " + ControllerHelper.ControllerHelperDemoMethod(1, 2));
             return Ok(dummyReturn);
         }
     }
