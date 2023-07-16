@@ -23,14 +23,22 @@ namespace DemoWebApiProject.Controllers
         [HttpGet("{id}")]
         public ActionResult<GameProgressDto> GetASpecificGameProgress(int id)
         {
-            var gameProgressToReturn = GameProgressDataStore.Instance.GameProgresses.FirstOrDefault(
-                c => c.Id == id
-                );
-            if (gameProgressToReturn == null) {
-                _logger.LogInformation($"The city with city id {id} cannot be found ... ");
-                return NotFound();
+            try {
+                // throw new Exception("Sample exception ...");
+                var gameProgressToReturn = GameProgressDataStore.Instance.GameProgresses.FirstOrDefault(
+    c => c.Id == id
+    );
+                if (gameProgressToReturn == null)
+                {
+                    _logger.LogInformation($"The city with city id {id} cannot be found ... ");
+                    return NotFound();
+                }
+                else return Ok(gameProgressToReturn);
             }
-            else return Ok(gameProgressToReturn);
+            catch (Exception ex) {
+                _logger.LogCritical($"Exception detected while getting the city with id {id}.\nException content: ", ex);
+                return StatusCode(500, "Only this message will be returned to the consumer as the API implementation details should not be exposed. ");
+            }
         }
 
         [HttpGet("{id}/gameprogressesonplatform")]

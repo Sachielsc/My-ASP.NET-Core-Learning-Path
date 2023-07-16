@@ -225,11 +225,6 @@ IIS provides a web-based management console, called Internet Information Service
 
 Overall, IIS is a widely used web server software that powers many websites and web applications running on the Windows platform.
 
-## Pluralsight ASP.NET Core 6 Web API Path and other Pluralsight tutorials
-记录：已经学完的视频：
-- ASP.NET Core 6: Big Picture (by Roland Guijt) - chapter 1 & 2
-- [ASP.NET Core 6 Web API Fundamentals (by Kevin Dockx)](https://app.pluralsight.com/course-player?clipId=ff09197b-954c-4a08-a5d9-83d3c17b17e0) - Learning progress here: [Link Text](./ASP.NET%20Core%206%20Web%20API%20Fundamentals%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md)
-
 # SOLID
 ## What is SOLID?
 It is five OOP principles, the first letter of each spelling out SOLID:
@@ -284,3 +279,12 @@ IoC containers achieve this by providing a centralized mechanism for managing th
 The IoC principle helps improve modularity, testability, and maintainability of software systems by reducing the coupling between components and promoting loose coupling and separation of concerns.
 
 IoC stands for Inversion of Control, which is the underlying concept behind IoC containers.
+
+# Logging
+##  Logging to a file
+ASP.NET Core doesn't include a logging provider for writing logs to files. To write logs to files from an ASP.NET Core app, consider using a [third-party logging provider](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-7.0#third-party-logging-providers)
+
+## Pluralsight ASP.NET Core 6 Web API Path and other Pluralsight tutorials
+记录：已经学完的视频：
+- ASP.NET Core 6: Big Picture (by Roland Guijt) - chapter 1 & 2
+- [ASP.NET Core 6 Web API Fundamentals (by Kevin Dockx)](https://app.pluralsight.com/course-player?clipId=ff09197b-954c-4a08-a5d9-83d3c17b17e0) - Learning progress here: [Link Text](./ASP.NET%20Core%206%20Web%20API%20Fundamentals%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md)
