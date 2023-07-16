@@ -24,7 +24,7 @@ namespace DemoWebApiProject.Controllers
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
-            _logger = logger;
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _logger.Log(LogLevel.Information, "Start testing one of the weather controllers ... \nThis weather controller has nothing to do with my game progress demo ... ");
         }
 
@@ -37,7 +37,7 @@ namespace DemoWebApiProject.Controllers
             var methodInfo = typeof(WeatherForecastController).GetMethod("GetWeatherForecast");
             string methodName = (methodInfo == null) ? "N/A" : methodInfo.Name;
             _logger.Log(LogLevel.Information, "Playing around the method info here. Method name: \"" + methodName + "\"\nLog more method information: " + methodInfo?.ToString());
-            _logger.Log(LogLevel.Information, "Playing around the helper class: " + ControllerHelper.ControllerHelperDemoMethod(1, 2));
+            _logger.Log(LogLevel.Information, "Playing around the helper class: print an integer " + ControllerHelper.ControllerHelperDemoMethod(1, 2));
             return Ok(dummyReturn);
         }
     }

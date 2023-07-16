@@ -8,6 +8,12 @@ namespace DemoWebApiProject.Controllers
     [Route("api/gameprogresses")]
     public class GameProgressDemoController : ControllerBase
     {
+        private readonly ILogger<GameProgressDemoController> _logger;
+        public GameProgressDemoController(ILogger<GameProgressDemoController> logger)
+        {
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+        }
+
         [HttpGet]
         public ActionResult<IEnumerable<GameProgressDto>> GetAllGameProgresses()
         {
@@ -20,7 +26,10 @@ namespace DemoWebApiProject.Controllers
             var gameProgressToReturn = GameProgressDataStore.Instance.GameProgresses.FirstOrDefault(
                 c => c.Id == id
                 );
-            if (gameProgressToReturn == null) { return NotFound(); }
+            if (gameProgressToReturn == null) {
+                _logger.LogInformation($"The city with city id {id} cannot be found ... ");
+                return NotFound();
+            }
             else return Ok(gameProgressToReturn);
         }
 
