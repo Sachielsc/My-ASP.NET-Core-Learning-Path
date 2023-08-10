@@ -1,13 +1,34 @@
 <b>Overall AspNetCore-Developer-Roadmap</b><br>
 [Click here to the roadmap site](https://github.com/MoienTajik/AspNetCore-Developer-Roadmap)
 
-<b>Table of Contents</b><br>
+<b>Table of Contents</b> - TODO<br>
 <i>To make this work, better check the header's anchor tag and its ID value from a html view of the md file</i>
 - [ASP.NET core basic](#aspnet-core-basic)
   - [Difference between .net core and .net framework](#difference-between-net-core-and-net-framework)
   - [What's the difference beween .NET Core and ASP.NET Core](#whats-the-difference-beween-net-core-and-aspnet-core)
   - [What is MVC pattern](#what-is-mvc-pattern)
   - [What is REST in asp.net core and give me a demo about REST in asp.net core](#what-is-rest-in-aspnet-core-and-give-me-a-demo-about-rest-in-aspnet-core)
+  - [Configuration in ASP.NET Core](#configuration-in-aspnet-core)
+  - [ASP.NET Core Middleware](#aspnet-core-middleware)
+  - [Filters in ASP.NET Core](#filters-in-aspnet-core)
+  - [Overview of ASP.NET Core authentication](#overview-of-aspnet-core-authentication)
+  - [Introduction to authorization in ASP.NET Core](#introduction-to-authorization-in-aspnet-core)
+  - [Choose an ASP.NET Core web UI](#choose-an-aspnet-core-web-ui)
+  - [Razor Pages](#razor-pages)
+  - [What is SignalR?](#what-is-signalr)
+  - [what is IIS](#what-is-iis)
+- [SOLID](#solid)
+  - [What is SOLID?](#what-is-solid)
+  - [Single Responsibility Principle (SRP)](#single-responsibility-principle-srp)
+  - [Open-Closed Principle (OCP)](#open-closed-principle-ocp)
+  - [Liskov Substitution Principle (LSP)](#liskov-substitution-principle-lsp)
+  - [Interface Segregation Principle (ISP)](#interface-segregation-principle-isp)
+  - [Dependency Inversion Principle (DIP)](#dependency-inversion-principle-dip)
+  - [What is loose coupling in software development](#what-is-loose-coupling-in-software-development)
+  - [What are IoC containers](#what-are-ioc-containers)
+- [Logging](#logging)
+  - [Logging to a file](#logging-to-a-file)
+- [Pluralsight ASP.NET Core 6 Web API Path and other Pluralsight tutorials](unknown link)
 
 # ASP.NET core basic
 ## Difference between .net core and .net framework
@@ -281,10 +302,10 @@ The IoC principle helps improve modularity, testability, and maintainability of 
 IoC stands for Inversion of Control, which is the underlying concept behind IoC containers.
 
 # Logging
-##  Logging to a file
+## Logging to a file
 ASP.NET Core doesn't include a logging provider for writing logs to files. To write logs to files from an ASP.NET Core app, consider using a [third-party logging provider](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-7.0#third-party-logging-providers)
 
-## Pluralsight ASP.NET Core 6 Web API Path and other Pluralsight tutorials
+# Pluralsight ASP.NET Core 6 Web API Path and other Pluralsight tutorials
 记录：已经学完的视频：
 - ASP.NET Core 6: Big Picture (by Roland Guijt) - chapter 1 & 2
 - [ASP.NET Core 6 Web API Fundamentals (by Kevin Dockx)](https://app.pluralsight.com/course-player?clipId=ff09197b-954c-4a08-a5d9-83d3c17b17e0) - Learning progress here: [Link Text](./ASP.NET%20Core%206%20Web%20API%20Fundamentals%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md)
