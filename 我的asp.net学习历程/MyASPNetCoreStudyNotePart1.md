@@ -3,6 +3,7 @@
 
 <b>Table of Contents</b><br>
 <i>To make this work, better check the header's anchor tag and its ID value from a html view of the md file</i>
+
 - [General Development Skills](#general-development-skills)
   - [An overview of HTTP](#an-overview-of-http)
   - [What is TLS, what is SSL?](#what-is-tls-what-is-ssl)
@@ -23,15 +24,19 @@
   - [What are the most commonly used types of indexes in SQL database](#what-are-the-most-commonly-used-types-of-indexes-in-sql-database)
   - [DDL vs DML](#ddl-vs-dml)
   - [Explain me these statements in SQL server - INSERT, UPDATE, DELETE, CREATE, ALTER, DROP, and so on](#explain-me-these-statements-in-sql-server---insert-update-delete-create-alter-drop-and-so-on)
-    - [INSERT](#insert-data-manipulation-language)
-    - [UPDATE](#update-data-manipulation-language)
-    - [MERGE](#merge-data-manipulation-language)
-    - [BULK INSERT](#bulk-insert-data-manipulation-language)
-    - [ALTER](#alter---data-definition-language)
-    - [Collations](#collations---data-definition-language)
-    - [CREATE](#create---data-definition-language)
-    - [DROP](#drop---data-definition-language)
-    - [DISABLE TRIGGER](#disable-trigger---data-definition-language-and-enable-trigger---data-definition-language)
+    <details>
+      <summary>Click to expand</summary>
+      
+      - [INSERT](#insert-data-manipulation-language)
+      - [UPDATE](#update-data-manipulation-language)
+      - [MERGE](#merge-data-manipulation-language)
+      - [BULK INSERT](#bulk-insert-data-manipulation-language)
+      - [ALTER](#alter---data-definition-language)
+      - [Collations](#collations---data-definition-language)
+      - [CREATE](#create---data-definition-language)
+      - [DROP](#drop---data-definition-language)
+      </details>
+  - [DISABLE TRIGGER](#disable-trigger---data-definition-language-and-enable-trigger---data-definition-language)
   - [The `GO` keyword](#the-go-keyword)
   - [Stored procedures](#stored-procedures)
   - [Triggers](#triggers)

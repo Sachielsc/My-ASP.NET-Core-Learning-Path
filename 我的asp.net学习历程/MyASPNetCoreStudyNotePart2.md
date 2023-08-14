@@ -1,7 +1,7 @@
 <b>Overall AspNetCore-Developer-Roadmap</b><br>
 [Click here to the roadmap site](https://github.com/MoienTajik/AspNetCore-Developer-Roadmap)
 
-<b>Table of Contents</b> - TODO<br>
+<b>Table of Contents</b><br>
 <i>To make this work, better check the header's anchor tag and its ID value from a html view of the md file</i>
 - [ASP.NET core basic](#aspnet-core-basic)
   - [Difference between .net core and .net framework](#difference-between-net-core-and-net-framework)
