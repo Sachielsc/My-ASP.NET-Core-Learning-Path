@@ -3,6 +3,7 @@
 
 <b>Table of Contents</b><br>
 <i>To make this work, better check the header's anchor tag and its ID value from a html view of the md file</i>
+
 - [ASP.NET core basic](#aspnet-core-basic)
   - [Difference between .net core and .net framework](#difference-between-net-core-and-net-framework)
   - [What's the difference beween .NET Core and ASP.NET Core](#whats-the-difference-beween-net-core-and-aspnet-core)
@@ -28,7 +29,7 @@
   - [What are IoC containers](#what-are-ioc-containers)
 - [Logging](#logging)
   - [Logging to a file](#logging-to-a-file)
-- [Pluralsight ASP.NET Core 6 Web API Path and other Pluralsight tutorials](unknown link)
+- [Pluralsight ASP.NET Core 6 Web API Path and other Pluralsight tutorials](#pluralsight-asdpnet-core-6-web-api-path-and-other-pluralsight-tutorials)
 
 # ASP.NET core basic
 ## Difference between .net core and .net framework
