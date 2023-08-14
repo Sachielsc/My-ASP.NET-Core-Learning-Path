@@ -29,7 +29,7 @@
   - [What are IoC containers](#what-are-ioc-containers)
 - [Logging](#logging)
   - [Logging to a file](#logging-to-a-file)
-- [Pluralsight ASP.NET Core 6 Web API Path and other Pluralsight tutorials](#pluralsight-asdpnet-core-6-web-api-path-and-other-pluralsight-tutorials)
+- [Pluralsight ASP.NET Core 6 Web API Path and other Pluralsight tutorials](#pluralsight-aspnet-core-6-web-api-path-and-other-pluralsight-tutorials)
 
 # ASP.NET core basic
 ## Difference between .net core and .net framework
