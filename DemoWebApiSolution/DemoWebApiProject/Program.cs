@@ -1,3 +1,12 @@
+using Serilog;
+
+// Set up Serilog
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Debug()
+    .WriteTo.Console()
+    .WriteTo.File("logs/gameprogresslog.txt", rollingInterval: RollingInterval.Month)
+    .CreateLogger();
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
