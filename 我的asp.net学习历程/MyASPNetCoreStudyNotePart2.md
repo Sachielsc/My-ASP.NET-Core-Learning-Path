@@ -27,6 +27,7 @@
   - [Dependency Inversion Principle (DIP)](#dependency-inversion-principle-dip)
   - [What is loose coupling in software development](#what-is-loose-coupling-in-software-development)
   - [What are IoC containers](#what-are-ioc-containers)
+  - [About IoC and ASP.NET Core](TODO)
 - [Logging](#logging)
   - [Logging to a file](#logging-to-a-file)
 - [Pluralsight ASP.NET Core 6 Web API Path and other Pluralsight tutorials](#pluralsight-aspnet-core-6-web-api-path-and-other-pluralsight-tutorials)
@@ -301,6 +302,10 @@ IoC containers achieve this by providing a centralized mechanism for managing th
 The IoC principle helps improve modularity, testability, and maintainability of software systems by reducing the coupling between components and promoting loose coupling and separation of concerns.
 
 IoC stands for Inversion of Control, which is the underlying concept behind IoC containers.
+
+## About IoC and ASP.NET Core
+- Dependency Injection is built into ASP.NET Core.
+- Register your services on the built-in container in your `Program` class.
 
 # Logging
 ## Logging to a file
