@@ -1,6 +1,6 @@
 using Serilog;
 
-// Set up Serilog
+// Set up Serilog here
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
     .WriteTo.Console()
@@ -8,8 +8,12 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
+//builder.Logging.ClearProviders();
+//builder.Logging.AddConsole();
 
-// Add services to the container.
+builder.Host.UseSerilog();
+
+// Add services to the container
 builder.Services.AddControllers().AddXmlDataContractSerializerFormatters(); // Demo: Formatters and Content negotiation
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
