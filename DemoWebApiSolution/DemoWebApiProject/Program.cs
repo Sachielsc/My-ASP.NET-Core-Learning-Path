@@ -1,3 +1,4 @@
+using DemoWebApiProject.MockData;
 using DemoWebApiProject.Services;
 using Serilog;
 
@@ -28,6 +29,8 @@ builder.Services.AddTransient<IDummyCustomizedServices, DummyCustomizedServicesL
 #else
 builder.Services.AddTransient<IDummyCustomizedServices, DummyCustomizedServicesCloud>();
 #endif
+
+builder.Services.AddSingleton<GameProgressDataStore>();
 
 var app = builder.Build();
 

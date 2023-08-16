@@ -9,15 +9,17 @@ namespace DemoWebApiProject.Controllers
     public class GameProgressDemoController : ControllerBase
     {
         private readonly ILogger<GameProgressDemoController> _logger;
-        public GameProgressDemoController(ILogger<GameProgressDemoController> logger)
+        private readonly GameProgressDataStore _gameProgressDataStore;
+        public GameProgressDemoController(ILogger<GameProgressDemoController> logger, GameProgressDataStore gameProgressDataStore)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            _gameProgressDataStore = gameProgressDataStore ?? throw new ArgumentNullException(nameof(gameProgressDataStore));
         }
 
         [HttpGet]
         public ActionResult<IEnumerable<GameProgressDto>> GetAllGameProgresses()
         {
-            return Ok(GameProgressDataStore.Instance.GameProgresses);
+            return Ok(_gameProgressDataStore.GameProgresses);
         }
 
         [HttpGet("{id}")]
@@ -25,7 +27,7 @@ namespace DemoWebApiProject.Controllers
         {
             try {
                 // throw new Exception("Sample exception ...");
-                var gameProgressToReturn = GameProgressDataStore.Instance.GameProgresses.FirstOrDefault(
+                var gameProgressToReturn = _gameProgressDataStore.GameProgresses.FirstOrDefault(
     c => c.Id == id
     );
                 if (gameProgressToReturn == null)
@@ -44,7 +46,7 @@ namespace DemoWebApiProject.Controllers
         [HttpGet("{id}/gameprogressesonplatform")]
         public ActionResult<IEnumerable<GameProgressOnPlatformDto>> GetAllGameProgressesOfASpecificGame(int id)
         {
-            var gameProgressToReturn = GameProgressDataStore.Instance.GameProgresses.FirstOrDefault(
+            var gameProgressToReturn = _gameProgressDataStore.GameProgresses.FirstOrDefault(
                 c => c.Id == id
                 );
             if (gameProgressToReturn == null) { return NotFound(); }
@@ -54,7 +56,7 @@ namespace DemoWebApiProject.Controllers
         [HttpGet("{id}/gameprogressesonplatform/{platformName}")]
         public ActionResult<GameProgressOnPlatformDto> GetASpecificGameProgressOfASpecificGame(int id, string platformName)
         {
-            var gameProgressToReturn = GameProgressDataStore.Instance.GameProgresses.FirstOrDefault(c => c.Id == id);
+            var gameProgressToReturn = _gameProgressDataStore.GameProgresses.FirstOrDefault(c => c.Id == id);
             if (gameProgressToReturn == null) { return NotFound(); }
             else
             {

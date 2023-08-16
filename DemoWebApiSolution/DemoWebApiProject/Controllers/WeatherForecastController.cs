@@ -40,8 +40,7 @@ namespace DemoWebApiProject.Controllers
             var methodInfo = typeof(WeatherForecastController).GetMethod("GetWeatherForecast");
             string methodName = (methodInfo == null) ? "N/A" : methodInfo.Name;
             _logger.Log(LogLevel.Information, "Playing around the method info here. Method name: \"" + methodName + "\"\nLog more method information: " + methodInfo?.ToString());
-            _logger.Log(LogLevel.Information, "Playing around the helper class: print an integer " + ControllerHelper.ControllerHelperDemoMethod(1, 2));
-            _dummyCustomizedServices.Send("hard-coded subject", "hard-coded mail content");
+            _dummyCustomizedServices.Send("hard-coded subject", "Playing around the helper class: print an integer " + ControllerHelper.ControllerHelperDemoMethod(1, 2));
             return Ok(dummyReturn);
         }
     }

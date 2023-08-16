@@ -5,7 +5,9 @@ namespace DemoWebApiProject.MockData
     public class GameProgressDataStore
     {
         public List<GameProgressDto> GameProgresses { get; set; }
-        public static GameProgressDataStore Instance { get; } = new GameProgressDataStore(); // this is a "singleton pattern"
+
+        // this is a "singleton pattern", so now we are removing this as we inject this class as a singleton to Program.cs
+        // public static GameProgressDataStore Instance { get; } = new GameProgressDataStore(); 
 
         public GameProgressDataStore()
         {
