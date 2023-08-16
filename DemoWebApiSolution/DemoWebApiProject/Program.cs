@@ -22,7 +22,12 @@ builder.Services.AddControllers().AddXmlDataContractSerializerFormatters(); // D
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+#if DEBUG
 builder.Services.AddTransient<IDummyCustomizedServices, DummyCustomizedServicesLocal>();
+#else
+builder.Services.AddTransient<IDummyCustomizedServices, DummyCustomizedServicesCloud>();
+#endif
 
 var app = builder.Build();
 

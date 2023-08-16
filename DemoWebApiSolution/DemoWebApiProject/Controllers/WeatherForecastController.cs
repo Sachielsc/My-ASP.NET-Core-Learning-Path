@@ -15,7 +15,7 @@ namespace DemoWebApiProject.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
-        private readonly IDummyCustomizedServices _dummyCustomizedServicesLocal;
+        private readonly IDummyCustomizedServices _dummyCustomizedServices;
         private readonly IEnumerable<WeatherForecastDto> dummyReturn = Enumerable.Range(1, 5).Select(index => new WeatherForecastDto
         {
             Date = DateTime.Now.AddDays(index),
@@ -24,10 +24,10 @@ namespace DemoWebApiProject.Controllers
         })
             .ToArray();
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IDummyCustomizedServices dummyCustomizedServicesLocal)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, IDummyCustomizedServices dummyCustomizedServices)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            _dummyCustomizedServicesLocal = dummyCustomizedServicesLocal ?? throw new ArgumentNullException(nameof(dummyCustomizedServicesLocal));
+            _dummyCustomizedServices = dummyCustomizedServices ?? throw new ArgumentNullException(nameof(dummyCustomizedServices));
             _logger.Log(LogLevel.Information, "Start testing one of the weather controllers ... \nThis weather controller has nothing to do with my game progress demo ... ");
         }
 
@@ -41,7 +41,7 @@ namespace DemoWebApiProject.Controllers
             string methodName = (methodInfo == null) ? "N/A" : methodInfo.Name;
             _logger.Log(LogLevel.Information, "Playing around the method info here. Method name: \"" + methodName + "\"\nLog more method information: " + methodInfo?.ToString());
             _logger.Log(LogLevel.Information, "Playing around the helper class: print an integer " + ControllerHelper.ControllerHelperDemoMethod(1, 2));
-            _dummyCustomizedServicesLocal.Send("hard-coded subject", "hard-coded mail content");
+            _dummyCustomizedServices.Send("hard-coded subject", "hard-coded mail content");
             return Ok(dummyReturn);
         }
     }
