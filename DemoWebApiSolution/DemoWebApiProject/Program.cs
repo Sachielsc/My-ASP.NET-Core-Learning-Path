@@ -8,9 +8,11 @@ Log.Logger = new LoggerConfiguration()
     .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
+// older way of logging
 //builder.Logging.ClearProviders();
 //builder.Logging.AddConsole();
 
+// logging using Serilog
 builder.Host.UseSerilog();
 
 // Add services to the container
