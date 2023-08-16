@@ -2,8 +2,13 @@
 {
     public class DummyCustomizedServicesLocal : IDummyCustomizedServices
     {
-        private string _dummyMailTo = "sachielsc@gmail.com";
-        private string _dummyMailFrom = "noreply@mycompany.com";
+        private readonly string _dummyMailTo;
+        private readonly string _dummyMailFrom;
+
+        public DummyCustomizedServicesLocal(IConfiguration configuration) {
+            _dummyMailTo = configuration["DummyCustomizedServicesSettings:dummyMailTo"] ?? "blank recipient";
+            _dummyMailFrom = configuration["DummyCustomizedServicesSettings:dummyMailFrom"] ?? "blank mail content";
+        }
 
         public void Send(string subject, string content)
         {
