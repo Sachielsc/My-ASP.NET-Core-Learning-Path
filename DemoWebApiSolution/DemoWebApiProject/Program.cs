@@ -1,3 +1,4 @@
+using DemoWebApiProject.Services;
 using Serilog;
 
 // Set up Serilog here
@@ -21,6 +22,7 @@ builder.Services.AddControllers().AddXmlDataContractSerializerFormatters(); // D
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddTransient<IDummyCustomizedServices, DummyCustomizedServicesLocal>();
 
 var app = builder.Build();
 
