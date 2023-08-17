@@ -6,6 +6,46 @@
 ## Rounting
 Routing matches a request URI to an action on a controller
 
+## ORM
+Object-Relational Mapping is a technique the lets you query and manipulate data from a database using an object-oriented paradigm
+
+## About Entity Framework Core
+- [Database providers](https://learn.microsoft.com/en-us/ef/core/providers/?tabs=dotnet-core-cli)
+- Two approaches to start: code-first and database-first. Since I don't have a database, I will start with the code-first approach
+
+### What is DTO?
+DTO stands for "Data Transfer Object." It is a design pattern commonly used in software development, especially in applications that involve the exchange of data between different layers or components of a system. The main purpose of a DTO is to encapsulate and transfer data between different parts of a program, often across different boundaries like network communication, service layers, or between application layers.
+
+DTOs are used to address issues like:
+
+1. **Reducing Overhead:** When transferring data between layers or components, it's often more efficient to package the required data into a single object (DTO) rather than sending multiple individual data elements.
+
+2. **Data Transformation:** DTOs can be used to transform data from one format to another. For instance, data fetched from a database might need to be converted into a different format before being sent over the network.
+
+3. **Hiding Implementation Details:** DTOs can be used to expose only necessary information while hiding implementation-specific details. This helps in maintaining a clear separation of concerns between different parts of the system.
+
+4. **Versioning:** When an application evolves, the structure of data might change. By using DTOs, you can manage data versioning and ensure that changes in one part of the application do not immediately impact other parts that rely on the data structure.
+
+5. **Security:** DTOs can be used to sanitize or limit the data being exposed to external sources. This helps in protecting sensitive or confidential information.
+
+DTOs are often implemented as simple classes or structures that contain fields corresponding to the data elements being transferred. They usually lack significant behavior, focusing primarily on carrying data from one place to another.
+
+Here's a simple example of a DTO in a hypothetical scenario:
+
+```java
+public class EmployeeDTO {
+    private String firstName;
+    private String lastName;
+    private String department;
+
+    // Getters and setters...
+}
+```
+
+In this example, `EmployeeDTO` is a data transfer object that could be used to transfer employee data between different layers of an application. It encapsulates the relevant data fields without containing any complex logic.
+
+It's important to note that while DTOs provide benefits, they can also introduce additional complexity, especially in applications with many layers or a significant amount of data transformation. As with any design pattern, their usage should be carefully considered based on the specific requirements and architecture of the application.
+
 # Misc
 ## Some dev hints
 - If we've worked with collections before, you will know that it is a good idea to always initialize them to an empty collection instead of leaving them null, as to avoid null reference issues 
@@ -94,3 +134,77 @@ T result = nullableValue ?? defaultValue;
 
 In the above code snippet, `nullableValue` is a nullable reference type, and `defaultValue` is a value that will be assigned to `result` if `nullableValue` is null. The null-coalescing operator checks if `nullableValue` is null. If it is null, the operator assigns `defaultValue` to `result`; otherwise, it assigns the value of `nullableValue` to `result`.
 
+## What is constructor chaining or constructor delegation?
+Adding `: parentclassname` after a constructor in certain programming languages is a way to invoke the constructor of the parent class (also known as the superclass or base class) within the constructor of the derived class (also known as the subclass). This process is called constructor chaining or constructor delegation.
+
+In object-oriented programming, when you create a new class that inherits from an existing class, the new class can have its own constructors. If you want to reuse the initialization logic from the parent class's constructor, you can call the parent class's constructor from within the derived class's constructor. This is particularly useful when the parent class has some specific setup that the derived class wants to include without duplicating code.
+
+The syntax for invoking a parent class's constructor depends on the programming language you're using. Here are a couple of examples in different languages:
+
+1. **Java:**
+In Java, you use the `super` keyword to call the constructor of the parent class. The syntax looks like this:
+
+```java
+public class ChildClass extends ParentClass {
+    public ChildClass() {
+        super(); // Calls the constructor of the ParentClass
+        // Additional initialization for ChildClass
+    }
+}
+```
+
+2. **C#:**
+In C#, you can use the `base` keyword to call the constructor of the parent class. Here's an example of constructor chaining in C#:
+
+```csharp
+class ParentClass
+{
+    public ParentClass()
+    {
+        Console.WriteLine("ParentClass constructor");
+    }
+}
+
+class ChildClass : ParentClass
+{
+    public ChildClass() : base()
+    {
+        Console.WriteLine("ChildClass constructor");
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        ChildClass child = new ChildClass();
+    }
+}
+```
+
+In this example:
+
+1. `ParentClass` defines a constructor that prints a message when it's invoked.
+2. `ChildClass` inherits from `ParentClass` and defines its own constructor. The `: base()` syntax calls the constructor of the parent class.
+3. In the `Main` method of the `Program` class, we create an instance of `ChildClass`.
+
+When you run this program, you'll see the following output:
+
+```
+ParentClass constructor
+ChildClass constructor
+```
+
+The `base()` call in the `ChildClass` constructor ensures that the constructor of the `ParentClass` is executed before the code in the `ChildClass` constructor is executed. This allows you to reuse the initialization logic from the parent class while adding any additional logic specific to the child class.
+
+3. **Python:**
+In Python, you don't need to explicitly call the parent class's constructor. By default, the parent class's constructor is automatically called when you create an instance of the child class. If you want to extend or modify the behavior, you can explicitly call the parent class's constructor using the `super()` function:
+
+```python
+class ChildClass(ParentClass):
+    def __init__(self):
+        super().__init__()  # Calls the constructor of the ParentClass
+        # Additional initialization for ChildClass
+```
+
+The `: parentclassname` part that you mentioned in your question is used to specify inheritance in some languages like C++. It indicates that the derived class is inheriting from the specified parent class. This is done as part of the class declaration and is not used directly after a constructor. Instead, the constructor chaining is achieved using the techniques described above.
