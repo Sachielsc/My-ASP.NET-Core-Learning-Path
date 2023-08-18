@@ -208,3 +208,6 @@ class ChildClass(ParentClass):
 ```
 
 The `: parentclassname` part that you mentioned in your question is used to specify inheritance in some languages like C++. It indicates that the derived class is inheriting from the specified parent class. This is done as part of the class declaration and is not used directly after a constructor. Instead, the constructor chaining is achieved using the techniques described above.
+
+## How to hide reference counts in VS2013?
+Tools → Options → Text Editor → All Languages → CodeLens

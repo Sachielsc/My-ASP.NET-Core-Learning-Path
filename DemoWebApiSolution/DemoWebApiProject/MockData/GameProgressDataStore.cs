@@ -11,7 +11,7 @@ namespace DemoWebApiProject.MockData
 
         public GameProgressDataStore()
         {
-            // initiate dummy data
+            // initiate dummy data in this constructor
             GameProgresses = new List<GameProgressDto>() {
                 new GameProgressDto()
                 {
@@ -29,6 +29,7 @@ namespace DemoWebApiProject.MockData
                     GameProgressOnPlatforms = new List<GameProgressOnPlatformDto>()
                     {
                         new GameProgressOnPlatformDto() {
+                            Id = 1,
                             Platform = "PC",
                             ProgressOnThisPlatform = "修改器修改了存档磁带数量通关，在游戏末期才入手隐藏武器"
                         }
