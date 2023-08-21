@@ -16,6 +16,9 @@ namespace DemoWebApiProject.Entities
         public string? ChineseName { get; set; }
         public string? EnglishName { get; set; }
         public string? Description { get; set; }
+        
+        [Required]
+        public int Year { get; set; }
         public ICollection<GameProgressOnPlatform> GameProgressOnPlatforms { get; set; } = new List<GameProgressOnPlatform>();
 
     }
