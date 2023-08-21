@@ -1,12 +1,17 @@
+using DemoWebApiProject.DbContexts;
 using DemoWebApiProject.MockData;
 using DemoWebApiProject.Services;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
+
+string logFileName = "logs\\gameprogresslog.txt";
+string dbFilePath = "Data\\GameProgress.db";
 
 // Set up Serilog here
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
     .WriteTo.Console()
-    .WriteTo.File("logs/gameprogresslog.txt", rollingInterval: RollingInterval.Month)
+    .WriteTo.File(logFileName, rollingInterval: RollingInterval.Month)
     .CreateLogger();
 
 var builder = WebApplication.CreateBuilder(args);
@@ -31,6 +36,8 @@ builder.Services.AddTransient<IDummyCustomizedServices, DummyCustomizedServicesC
 #endif
 
 builder.Services.AddSingleton<GameProgressDataStore>();
+
+builder.Services.AddDbContext<GameProgressContext>(dbContextOptions => dbContextOptions.UseSqlite($"Data source={dbFilePath}"));
 
 var app = builder.Build();
 
