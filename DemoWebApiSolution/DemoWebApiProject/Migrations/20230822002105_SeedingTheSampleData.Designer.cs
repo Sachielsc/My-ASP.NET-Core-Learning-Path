@@ -2,6 +2,7 @@
 using DemoWebApiProject.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoWebApiProject.Migrations
 {
     [DbContext(typeof(GameProgressContext))]
-    partial class GameProgressContextModelSnapshot : ModelSnapshot
+    [Migration("20230822002105_SeedingTheSampleData")]
+    partial class SeedingTheSampleData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.10");
@@ -66,7 +69,6 @@ namespace DemoWebApiProject.Migrations
                             GameId = 3,
                             ChineseName = "暗黑破坏神2重制版",
                             Description = "童年经典的完美重现\n而且现在还在更新平衡性补丁以及新内容",
-                            EnglishName = "Diablo® II: Resurrected",
                             Name = "暗黑破坏神2重制版 D2R",
                             Year = 2022
                         });
@@ -117,7 +119,7 @@ namespace DemoWebApiProject.Migrations
                             BugsAndIssues = "坑爹的暴雪大幅下调了暴率",
                             GameId = 3,
                             Platform = "PC",
-                            ProgressOnThisPlatform = "联机模式下七职业慢慢交易以及慢慢刷\n单机模式下普通模式正在打造最强配置，硬核模式下考虑导入极品黄以及老版本暗金进行娱乐",
+                            ProgressOnThisPlatform = "联机模式下七职业慢慢交易以及慢慢刷\r\n单机模式下普通模式正在打造最强配置，硬核模式下考虑导入极品黄以及老版本暗金进行娱乐",
                             RecommendedMouseSpeed = "Undecided mouse speed"
                         });
                 });
