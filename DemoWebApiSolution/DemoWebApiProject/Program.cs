@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 
 string logFileName = "logs\\gameprogresslog.txt";
-string databaseFilePath = "Data\\GameProgress.db";
 
 // Set up Serilog here
 Log.Logger = new LoggerConfiguration()
@@ -37,7 +36,7 @@ builder.Services.AddTransient<IDummyCustomizedServices, DummyCustomizedServicesC
 
 builder.Services.AddSingleton<GameProgressDataStore>();
 
-builder.Services.AddDbContext<GameProgressContext>(dbContextOptions => dbContextOptions.UseSqlite($"Data source={databaseFilePath}"));
+builder.Services.AddDbContext<GameProgressContext>(dbContextOptions => dbContextOptions.UseSqlite(builder.Configuration["ConnectionStrings:GameProgressDBConnectionString"]));
 
 var app = builder.Build();
 

@@ -11,6 +11,9 @@ namespace DemoWebApiProject.DbContexts
 
         public GameProgressContext(DbContextOptions<GameProgressContext> dbContextOptions) : base(dbContextOptions) { }
 
+        /// <summary>
+        /// Seeding the sample data here.
+        /// </summary>
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<GameProgress>().HasData(
