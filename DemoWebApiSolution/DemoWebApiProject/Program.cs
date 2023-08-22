@@ -4,21 +4,20 @@ using DemoWebApiProject.Services;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
-string logFileName = "logs\\gameprogresslog.txt";
+var builder = WebApplication.CreateBuilder(args);
+
+// older way of logging
+//builder.Logging.ClearProviders();
+//builder.Logging.AddConsole();
 
 // Set up Serilog here
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Debug()
     .WriteTo.Console()
-    .WriteTo.File(logFileName, rollingInterval: RollingInterval.Month)
+    .WriteTo.File(builder.Configuration["Etc:LogFileLocation"], rollingInterval: RollingInterval.Month)
     .CreateLogger();
 
-var builder = WebApplication.CreateBuilder(args);
-// older way of logging
-//builder.Logging.ClearProviders();
-//builder.Logging.AddConsole();
-
-// logging using Serilog
+// newer way of logging, using Serilog
 builder.Host.UseSerilog();
 
 // Add services to the container
