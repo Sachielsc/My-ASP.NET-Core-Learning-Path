@@ -239,3 +239,58 @@ Using both DTOs and entities in API programming helps to separate concerns and m
 5. **Security:** DTOs can help you control the information exposed to clients, ensuring that sensitive data is not leaked.
 
 In summary, entities represent your data at the core of your application's logic, while DTOs manage how that data is presented and transferred across different layers of your application and to external clients via your API. This separation enhances modularity, security, and maintainability in your API programming.
+
+## About negative test scenarios API testing
+Negative test scenarios in API testing involve testing the system's behavior under conditions that are outside the expected or valid range. These scenarios help ensure that the API handles errors and exceptions gracefully. Here are some examples of negative test scenarios in API testing:
+
+1. **Invalid Input Data:**
+   - Sending empty or null values for required parameters.
+   - Providing data in the wrong format (e.g., sending a string instead of an integer).
+   - Sending data with special characters that could potentially break the API's parsing.
+
+2. **Boundary Testing:**
+   - Sending values at the lower and upper boundaries of valid ranges for numeric parameters.
+   - Sending strings with the maximum allowed length.
+
+3. **Authentication and Authorization Failures:**
+   - Sending requests without proper authentication tokens or API keys.
+   - Using expired or invalid authentication tokens.
+   - Testing different levels of authorization to ensure users can't access unauthorized resources.
+
+4. **Rate Limiting:**
+   - Sending requests that exceed the allowed rate limit to check if the API correctly enforces rate limits.
+
+5. **Error Responses:**
+   - Triggering errors intentionally by sending incorrect or missing parameters and checking if the API returns the expected error codes and messages.
+   - Testing how the API responds when it encounters internal errors or exceptions.
+
+6. **Concurrency Testing:**
+   - Sending multiple requests simultaneously to see how the API handles concurrent requests and whether it maintains data consistency.
+
+7. **Network Failures:**
+   - Interrupting the network connection while a request is in progress to test the API's behavior during network failures.
+   - Sending requests with high latency to assess how the API handles slow connections.
+
+8. **Resource Deletion and Modification:**
+   - Attempting to delete or modify resources that are not owned by the requester.
+   - Trying to modify resources that have been deleted.
+
+9. **Input Validation:**
+   - Sending input data that contains SQL injection or other malicious code to test the API's input validation and security measures.
+
+10. **Data Integrity:**
+    - Tampering with the data being sent or received to check if the API can detect data corruption or unauthorized changes.
+
+11. **Version Compatibility:**
+    - Sending requests with a version number that the API does not support to verify if versioning is handled correctly.
+
+12. **Load Testing:**
+    - Sending a large number of requests to test how the API performs under heavy load, and monitoring for performance degradation or crashes.
+
+13. **Edge Cases:**
+    - Testing scenarios that involve unusual or unexpected combinations of parameters or conditions to uncover hidden bugs.
+
+14. **Timeouts:**
+    - Sending requests that take longer to respond than the configured timeout to ensure the API handles timeouts appropriately.
+
+Remember, negative test scenarios are designed to find weaknesses and vulnerabilities in your API. Properly addressing these scenarios will lead to a more robust and reliable API implementation.
