@@ -326,3 +326,65 @@ Popular ORM frameworks include:
 - **SQLAlchemy**: A Python ORM that can be used with various databases.
 
 ORM can significantly simplify database interactions, speed up development, and improve maintainability of code by reducing the need to write raw SQL queries. However, understanding the underlying SQL and database concepts is still important when working with ORM, especially for complex scenarios or performance optimization.
+
+## What is Swashbuckle
+Swashbuckle is a tool within the .NET ecosystem, specifically for working with ASP.NET Web API applications. Swashbuckle is a library that provides automated generation of Swagger documentation and a UI for exploring and interacting with APIs.
+
+Here's what Swashbuckle offers:
+
+1. **Swagger Documentation Generation:** Swagger is a specification for documenting APIs. Swashbuckle enables you to automatically generate Swagger documentation for your ASP.NET Web API endpoints. This documentation includes information about the API endpoints, their parameters, request and response formats, and other relevant details.
+
+2. **Interactive API Documentation UI:** Swashbuckle includes a built-in UI called Swagger UI. This UI provides a user-friendly interface where developers can visualize and interact with the API documentation. It allows users to make API requests directly from the documentation page, see responses, and understand how to use the API effectively.
+
+3. **API Exploration and Testing:** Swagger UI, provided by Swashbuckle, allows developers to explore API endpoints, understand their functionality, and even test them by sending requests with various parameters. This can be immensely helpful during development and testing phases.
+
+4. **Code Annotations:** Swashbuckle can use XML code comments or attributes within your ASP.NET Web API code to enhance the generated Swagger documentation. By adding comments or attributes, you can provide additional information about endpoints, parameters, and responses, making the documentation more comprehensive.
+
+5. **Integration with ASP.NET Web API:** Swashbuckle integrates seamlessly with ASP.NET Web API projects, making it easy to set up and configure. It's available as a NuGet package that you can add to your project.
+
+Overall, Swashbuckle is a valuable tool for improving the documentation and usability of ASP.NET Web API applications. It helps developers create clear, interactive, and accurate documentation for their APIs, which can lead to better communication with API consumers and more efficient development processes.
+
+## What are the 3 different types of lifetime of dependency injection in asp.net core, and what are their differences?
+In ASP.NET Core's dependency injection (DI) system, there are three main types of lifetime for registered services. These lifetimes dictate how long a service instance is maintained and how it's shared among different parts of the application. The three types are: **Transient**, **Scoped**, and **Singleton**. Here's an explanation of each:
+
+1. **Transient Lifetime:**
+   - A new instance of the service is created every time it's requested from the DI container.
+   - Transient services are best suited for lightweight, stateless components that don't need to maintain state across different parts of the application.
+   - This lifetime is useful for scenarios where you want a fresh instance each time, such as for data access, logging, or simple utility classes.
+   - Transient services may have higher overhead due to the creation of new instances frequently.
+
+2. **Scoped Lifetime:**
+   - A single instance of the service is created and used throughout the scope of a single HTTP request (in a web application) or a single operation (in a non-web application).
+   - Scoped services are intended to be used for stateful components that need to maintain state within a specific scope, such as a single HTTP request.
+   - Services registered as scoped are created once per scope and then reused within that scope.
+   - Scoped services help reduce the overhead of creating instances for each request while still isolating state within the context of the scope.
+
+3. **Singleton Lifetime:**
+   - A single instance of the service is created and shared across all requests for the lifetime of the application.
+   - Singleton services are appropriate for components that are expensive to create or maintain and should be shared across the application.
+   - They are suitable for caching, configuration, and services that maintain application-wide state.
+   - Singleton services are created the first time they are requested and the same instance is reused for subsequent requests.
+
+**Key Differences:**
+
+- **Scope of Instances:**
+  - Transient: New instance per request.
+  - Scoped: One instance per scope (e.g., one HTTP request).
+  - Singleton: One instance for the entire application lifetime.
+
+- **Usage:**
+  - Transient: Stateless, lightweight services.
+  - Scoped: Stateful services specific to a scope (e.g., request).
+  - Singleton: Expensive-to-create components, application-wide state.
+
+- **Performance Impact:**
+  - Transient: Can have a higher performance overhead due to frequent instance creation.
+  - Scoped: Offers a balance between instance creation and reuse.
+  - Singleton: Potential contention for the single instance in high-concurrency scenarios.
+
+- **Memory Usage:**
+  - Transient: Can lead to more memory usage due to many short-lived instances.
+  - Scoped: More memory-efficient within a scope compared to transient.
+  - Singleton: Can lead to memory retention, potentially causing memory leaks if not managed properly.
+
+Choosing the appropriate lifetime for your services depends on the nature of the service and the behavior you need in your application. Careful consideration of these lifetimes helps you optimize performance and resource utilization in your ASP.NET Core application.

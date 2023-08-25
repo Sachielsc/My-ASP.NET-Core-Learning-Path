@@ -311,7 +311,143 @@ IoC stands for Inversion of Control, which is the underlying concept behind IoC 
 ## Logging to a file
 ASP.NET Core doesn't include a logging provider for writing logs to files. To write logs to files from an ASP.NET Core app, consider using a [third-party logging provider](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/logging/?view=aspnetcore-7.0#third-party-logging-providers)
 
+# Databases
+## What are the widely used relational database management system (RDBMS) providers? And what are their characteristics and features?
+There are several common relational database management system (RDBMS) providers, each with its own characteristics and features. Here are some of the most well-known ones:
+
+1. **MySQL:**
+   - **Characteristics:** Open-source, widely used, suitable for various applications, supports multiple storage engines, good performance for read-heavy workloads.
+   - **Use Cases:** Web applications, content management systems, e-commerce platforms, data warehousing.
+
+2. **PostgreSQL:**
+   - **Characteristics:** Open-source, advanced features like JSON support, extensibility, supports complex queries, strong data integrity and reliability.
+   - **Use Cases:** Diverse range of applications including complex applications, data analytics, geospatial applications.
+
+3. **Microsoft SQL Server:**
+   - **Characteristics:** Offers various editions (Express, Standard, Enterprise), great integration with Microsoft technologies, supports high availability and business intelligence features.
+   - **Use Cases:** Enterprise applications, Windows-based environments, business intelligence, data warehousing.
+
+4. **Oracle Database:**
+   - **Characteristics:** High-performance, robust, supports complex transactions, offers advanced security features, widely used in large enterprises.
+   - **Use Cases:** Enterprise-level applications, data warehousing, complex business applications.
+
+5. **SQLite:**
+   - **Characteristics:** Embedded database, serverless and file-based, lightweight, suitable for mobile and desktop applications.
+   - **Use Cases:** Local storage for mobile apps, desktop applications, small-scale projects.
+
+6. **IBM Db2:**
+   - **Characteristics:** Supports various platforms, offers hybrid cloud capabilities, scalable, supports advanced analytics.
+   - **Use Cases:** Enterprise applications, data warehousing, analytics.
+
+7. **MariaDB:**
+   - **Characteristics:** Fork of MySQL, open-source, designed for compatibility and performance improvements over MySQL.
+   - **Use Cases:** Similar to MySQL, any application where MySQL is used.
+
+8. **Amazon RDS (Relational Database Service):**
+   - **Characteristics:** Managed database service by Amazon Web Services, supports multiple RDBMS engines like MySQL, PostgreSQL, SQL Server, Oracle, etc.
+   - **Use Cases:** Cloud-based applications, scalable environments, various RDBMS engines.
+
+**Common Characteristics and Considerations:**
+- **ACID Compliance:** Most RDBMS providers offer ACID (Atomicity, Consistency, Isolation, Durability) compliance to ensure data integrity and consistency.
+- **SQL Support:** All major RDBMS systems use SQL (Structured Query Language) for querying and managing data.
+- **Scalability:** Some systems, like MySQL and PostgreSQL, support horizontal and vertical scaling options.
+- **High Availability:** Many RDBMS systems offer features for high availability and fault tolerance, such as replication, clustering, and backup/restore mechanisms.
+- **Licensing:** Consider the licensing model of the RDBMS, as it can impact costs and deployment flexibility.
+- **Performance:** Different systems have strengths in different areas, so choose based on the specific performance requirements of your application.
+- **Community and Support:** Consider the size and activity of the user community, as well as the availability of documentation and support resources.
+
+The choice of an RDBMS provider should be based on your project's requirements, scalability needs, budget, and the specific features offered by each provider.
+
+## What does RDBMS stand for
+RDBMS stands for "Relational Database Management System." It refers to a type of database management system that stores and manages data using a relational model. In an RDBMS, data is organized into tables, each consisting of rows and columns, with relationships established between tables using keys. This model allows for structured and efficient storage, retrieval, and manipulation of data.
+
+Here's a breakdown of the components of the acronym:
+
+- **R**: Relational
+- **DBMS**: Database Management System
+
+The "relational" aspect indicates that the data is organized into tables with predefined schemas, where the relationships between tables are defined by primary keys and foreign keys. This structure makes it possible to establish meaningful connections between different pieces of data and perform complex queries and transactions.
+
+Some popular examples of RDBMS systems include MySQL, PostgreSQL, Microsoft SQL Server, Oracle Database, and SQLite. RDBMS systems have been widely used for decades to handle structured data in various applications, ranging from simple websites to complex enterprise-level systems.
+
+## What is a schema of a database?
+In the context of a database, a schema refers to the logical structure or blueprint that defines how data is organized, stored, and accessed. It defines the layout of tables, relationships between tables, data types, constraints, and other attributes that govern the structure of the database.
+
+A schema serves as a way to ensure data consistency, integrity, and organization within a database. It helps developers, administrators, and users understand how the data is structured and how different pieces of information relate to each other.
+
+Here's a simple example of a database schema for a bookstore:
+
+Let's say we have a bookstore database with two main entities: `Books` and `Authors`. Each book has an author, and each author can have multiple books.
+
+**Database Schema:**
+
+- **Table: Authors**
+  - Columns:
+    - `AuthorID` (Primary Key)
+    - `FirstName`
+    - `LastName`
+
+- **Table: Books**
+  - Columns:
+    - `BookID` (Primary Key)
+    - `Title`
+    - `PublicationYear`
+    - `AuthorID` (Foreign Key referencing Authors)
+
+In this schema:
+
+- The `Authors` table stores information about authors, with each author identified by a unique `AuthorID`.
+- The `Books` table stores information about books, with each book identified by a unique `BookID`.
+- The `AuthorID` column in the `Books` table serves as a foreign key that establishes a relationship between books and authors. It references the `AuthorID` column in the `Authors` table.
+
+This schema outlines the structure of the database, the tables it contains, the columns in each table, and the relationships between the tables. It provides a clear and standardized way to store and retrieve information about authors and their books.
+
+When creating and managing databases, defining a schema is a critical step. It ensures that data is stored consistently and that the database can enforce rules such as data type constraints, referential integrity, and more.
+
+## NoSQL vs relational database
+The comparison between NoSQL and relational databases in terms of being "more powerful" depends on the specific use case, requirements, and characteristics of the application. Both types of databases have their strengths and weaknesses, and their suitability depends on the nature of the data and the goals of the application.
+
+**Relational Databases (RDBMS):**
+
+Strengths:
+- Well-suited for structured data with fixed schemas.
+- ACID compliance (Atomicity, Consistency, Isolation, Durability) ensures data integrity.
+- Suitable for applications with complex relationships and transactions.
+- Widely used, mature, and established in various industries.
+
+Weaknesses:
+- Limited flexibility for handling unstructured or rapidly changing data.
+- May have scaling limitations for certain types of applications.
+- Some relational databases struggle with horizontal scalability.
+
+**NoSQL Databases:**
+
+Strengths:
+- Flexible schema allows for handling unstructured or semi-structured data.
+- Better scalability and performance for large-scale, distributed applications.
+- Suitable for handling real-time data, big data, and dynamic content.
+- Can be tailored to specific data models (document, key-value, graph, etc.).
+
+Weaknesses:
+- May lack ACID compliance, which can impact data consistency and integrity in certain scenarios.
+- Learning curve for specific data models and query languages.
+- Limited support for complex joins and transactions in some cases.
+
+In essence, the choice between NoSQL and relational databases is not about one being inherently more powerful than the other. Instead, it's about selecting the right tool for the job based on the application's requirements.
+
+- **Choose a Relational Database If:**
+  - You have structured data with well-defined relationships.
+  - Data consistency, integrity, and ACID compliance are critical.
+  - Your application involves complex queries and transactions.
+
+- **Choose a NoSQL Database If:**
+  - You deal with unstructured or semi-structured data.
+  - Scalability, performance, and flexibility are priorities.
+  - Your application requires real-time data processing, big data, or specific data models.
+
+Both NoSQL and relational databases have their roles in the technology landscape, and often, modern applications use a combination of both to take advantage of their respective strengths for different parts of the application.
+
 # Pluralsight ASP.NET Core 6 Web API Path and other Pluralsight tutorials
 记录：已经学完的视频：
 - ASP.NET Core 6: Big Picture (by Roland Guijt) - chapter 1 & 2
-- [ASP.NET Core 6 Web API Fundamentals (by Kevin Dockx)](https://app.pluralsight.com/course-player?clipId=ff09197b-954c-4a08-a5d9-83d3c17b17e0) - Learning progress here: [Link Text](./ASP.NET%20Core%206%20Web%20API%20Fundamentals%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md)
+- [ASP.NET Core 6 Web API Fundamentals (by Kevin Dockx)](https://app.pluralsight.com/course-player?clipId=ff09197b-954c-4a08-a5d9-83d3c17b17e0) - Learning progress here: [Click here for redirection](./ASP.NET%20Core%206%20Web%20API%20Fundamentals%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.md)

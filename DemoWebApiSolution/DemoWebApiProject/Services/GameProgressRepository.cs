@@ -12,10 +12,12 @@ namespace DemoWebApiProject.Services
         {
             _gameProgressContext = gameProgressContext ?? throw new ArgumentNullException(nameof(gameProgressContext));
         }
+
         public async Task<IEnumerable<GameProgress>> GetGameProgressesAsync()
         {
             return await _gameProgressContext.GameProgresses.ToListAsync();
         }
+
         public Task<GameProgress?> GetGameProgressAsync(int gameId)
         {
             throw new NotImplementedException();
