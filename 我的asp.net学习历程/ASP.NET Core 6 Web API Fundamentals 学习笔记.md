@@ -294,3 +294,35 @@ Negative test scenarios in API testing involve testing the system's behavior und
     - Sending requests that take longer to respond than the configured timeout to ensure the API handles timeouts appropriately.
 
 Remember, negative test scenarios are designed to find weaknesses and vulnerabilities in your API. Properly addressing these scenarios will lead to a more robust and reliable API implementation.
+
+## About filtering and searching feature of api
+Filtering allows you to be precise by adding filters until you get exactly the property/value pair
+Searching allows you to go wider, it is used when you don't exactly know which items will be in the collection
+
+## What is ORM (EF is an ORM)
+ORM stands for "Object-Relational Mapping." It's a programming technique and a set of tools or frameworks that facilitate the communication between object-oriented programming languages and relational databases. 
+
+In traditional software development, data is often stored in relational databases using tables, rows, and columns. On the other hand, modern programming languages like Java, Python, or C# use object-oriented structures to represent data and functionality. ORM bridges this gap by providing a way to map objects from the programming language to rows in database tables and vice versa.
+
+Here's how ORM works:
+
+1. **Mapping**: Developers define a mapping between the classes (objects) in their programming language and the tables in the database. This mapping describes how data in objects should be stored in the database and how database records should be loaded into objects.
+
+2. **Abstraction**: ORM abstracts away much of the low-level SQL code that's required to interact with the database. Developers can work with objects and high-level queries rather than writing direct SQL statements.
+
+3. **CRUD Operations**: ORM frameworks provide methods and APIs to perform basic database operations like Create, Read, Update, and Delete (CRUD) directly using objects and their methods.
+
+4. **Optimization and Query Generation**: ORM frameworks often optimize the database queries they generate to improve performance. They might also provide ways to write complex queries in a more object-oriented manner.
+
+5. **Database Agnostic**: ORM allows developers to switch between different database systems (like MySQL, PostgreSQL, SQLite, etc.) without changing much of the application code, as long as the ORM supports those databases.
+
+6. **Relationship Management**: ORM handles relationships between objects, such as one-to-many, many-to-many, etc., by managing the relationships between the corresponding database tables.
+
+Popular ORM frameworks include:
+
+- **Hibernate**: For Java applications.
+- **Entity Framework**: For .NET applications.
+- **Django ORM**: For Python applications using the Django framework.
+- **SQLAlchemy**: A Python ORM that can be used with various databases.
+
+ORM can significantly simplify database interactions, speed up development, and improve maintainability of code by reducing the need to write raw SQL queries. However, understanding the underlying SQL and database concepts is still important when working with ORM, especially for complex scenarios or performance optimization.
