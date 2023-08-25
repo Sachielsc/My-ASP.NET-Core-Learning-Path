@@ -1,5 +1,6 @@
 ﻿using DemoWebApiProject.DbContexts;
 using DemoWebApiProject.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace DemoWebApiProject.Services
 {
@@ -11,12 +12,11 @@ namespace DemoWebApiProject.Services
         {
             _gameProgressContext = gameProgressContext ?? throw new ArgumentNullException(nameof(gameProgressContext));
         }
-        public Task<GameProgress?> GetGameProgressAsync(int gameId)
+        public async Task<IEnumerable<GameProgress>> GetGameProgressesAsync()
         {
-            throw new NotImplementedException();
+            return await _gameProgressContext.GameProgresses.ToListAsync();
         }
-
-        public Task<IEnumerable<GameProgress>> GetGameProgressesAsync()
+        public Task<GameProgress?> GetGameProgressAsync(int gameId)
         {
             throw new NotImplementedException();
         }
