@@ -25,10 +25,11 @@ namespace DemoWebApiProject.Controllers
         [HttpGet("{id}")]
         public ActionResult<GameProgressDto> GetASpecificGameProgress(int id)
         {
-            try {
+            try
+            {
                 // throw new Exception("Sample exception ...");
                 var gameProgressToReturn = _gameProgressDataStore.GameProgresses.FirstOrDefault(
-    c => c.Id == id
+    g => g.Id == id
     );
                 if (gameProgressToReturn == null)
                 {
@@ -37,7 +38,8 @@ namespace DemoWebApiProject.Controllers
                 }
                 else return Ok(gameProgressToReturn);
             }
-            catch (Exception ex) {
+            catch (Exception ex)
+            {
                 _logger.LogCritical($"Exception detected while getting the city with id {id}.\nException content: ", ex);
                 return StatusCode(500, "Only this message will be returned to the consumer as the API implementation details should not be exposed. ");
             }
@@ -47,7 +49,7 @@ namespace DemoWebApiProject.Controllers
         public ActionResult<IEnumerable<GameProgressOnPlatformDto>> GetAllGameProgressesOfASpecificGame(int id)
         {
             var gameProgressToReturn = _gameProgressDataStore.GameProgresses.FirstOrDefault(
-                c => c.Id == id
+                g => g.Id == id
                 );
             if (gameProgressToReturn == null) { return NotFound(); }
             else return Ok(gameProgressToReturn.GameProgressOnPlatforms);
@@ -56,11 +58,11 @@ namespace DemoWebApiProject.Controllers
         [HttpGet("{id}/gameprogressesonplatform/{platformName}")]
         public ActionResult<GameProgressOnPlatformDto> GetASpecificGameProgressOfASpecificGame(int id, string platformName)
         {
-            var gameProgressToReturn = _gameProgressDataStore.GameProgresses.FirstOrDefault(c => c.Id == id);
+            var gameProgressToReturn = _gameProgressDataStore.GameProgresses.FirstOrDefault(g => g.Id == id);
             if (gameProgressToReturn == null) { return NotFound(); }
             else
             {
-                var gameProgressOnPlatformToReturn = gameProgressToReturn.GameProgressOnPlatforms.FirstOrDefault(c => c.Platform == platformName);
+                var gameProgressOnPlatformToReturn = gameProgressToReturn.GameProgressOnPlatforms.FirstOrDefault(g => g.Platform == platformName);
                 if (gameProgressOnPlatformToReturn == null) { return NotFound(); }
                 else
                     return gameProgressOnPlatformToReturn;
