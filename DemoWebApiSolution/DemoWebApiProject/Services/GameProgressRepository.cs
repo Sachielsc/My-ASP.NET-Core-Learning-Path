@@ -1,6 +1,7 @@
 ﻿using DemoWebApiProject.DbContexts;
 using DemoWebApiProject.Entities;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace DemoWebApiProject.Services
 {
@@ -15,22 +16,28 @@ namespace DemoWebApiProject.Services
 
         public async Task<IEnumerable<GameProgress>> GetGameProgressesAsync()
         {
-            return await _gameProgressContext.GameProgresses.ToListAsync();
+            return await _gameProgressContext.GameProgresses.OrderBy(g => g.Name).ToListAsync();
         }
 
-        public Task<GameProgress?> GetGameProgressAsync(int gameId)
+        public async Task<GameProgress?> GetGameProgressAsync(int gameId)
         {
-            throw new NotImplementedException();
+            return await _gameProgressContext.GameProgresses.Include(g => g.GameProgressOnPlatforms)
+                .Where(g => g.GameId == gameId)
+                .FirstOrDefaultAsync();
         }
 
-        public Task<IEnumerable<GameProgressOnPlatform>> GetGameProgressesOnPlatformsAsync()
+        public async Task<IEnumerable<GameProgressOnPlatform>> GetGameProgressesOnPlatformsAsync(int gameId)
         {
-            throw new NotImplementedException();
+            return await _gameProgressContext.GameProgressOnPlatforms
+                .Where(g => g.GameId == gameId)
+                .ToListAsync();
         }
 
-        public Task<GameProgressOnPlatform?> GetGameProgressOnPlatformAsync(int gameId, int gameProgressOnThisPlatformId)
+        public async Task<GameProgressOnPlatform?> GetGameProgressOnPlatformAsync(int gameId, int gameProgressOnThisPlatformId)
         {
-            throw new NotImplementedException();
+            return await _gameProgressContext.GameProgressOnPlatforms
+                .Where(g => g.GameId == gameId && g.GameProgressOnThisPlatformId == gameProgressOnThisPlatformId)
+                .FirstOrDefaultAsync();
         }
     }
 }
