@@ -4,6 +4,7 @@ using DemoWebApiProject.Models;
 using DemoWebApiProject.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using DemoWebApiProject.Utilities;
 
 namespace DemoWebApiProject.Controllers
 {
@@ -24,43 +25,12 @@ namespace DemoWebApiProject.Controllers
         public async Task<ActionResult<IEnumerable<GameProgressDto>>> GetAllGameProgresses()
         {
             var entityResult = await _gameProgressRepository.GetGameProgressesAsync();
-            var dtoResult = MannualMapperFromGameProgressEntityToDto(entityResult);
+
+            // Use some manual object mapping methods here
+            var dtoResult = ControllerHelper.MannualMapperFromGameProgressEntityToDto(entityResult);
             return Ok(dtoResult);
         }
 
-        // Some manual object mapping methods
-        private List<GameProgressDto> MannualMapperFromGameProgressEntityToDto(IEnumerable<GameProgress> entities) {
-            var dtoResult = new List<GameProgressDto>();
-            foreach (var entity in entities)
-            {
-                dtoResult.Add(new GameProgressDto
-                {
-                    Id = entity.GameId
-                    ,Name = entity.Name
-                    ,ChineseName = entity.ChineseName
-                    ,EnglishName = entity.EnglishName
-                    ,Description = entity.Description
-                    ,GameProgressOnPlatforms = MannualMapperFromGameProgressOnPlatformEntityToDto(entity.GameProgressOnPlatforms)
-                });
-            }
-            return dtoResult;
-        }
-
-        private List<GameProgressOnPlatformDto> MannualMapperFromGameProgressOnPlatformEntityToDto ( IEnumerable<GameProgressOnPlatform> entities ) {
-            var dtoResult = new List<GameProgressOnPlatformDto>();
-            foreach ( var entity in entities )
-            {
-                dtoResult.Add(new GameProgressOnPlatformDto
-                {
-                    Id = entity.GameProgressOnThisPlatformId,
-                    Platform = entity.Platform,
-                    RecommendedMouseSpeed = entity.RecommendedMouseSpeed,
-                    BugsAndIssues = entity.BugsAndIssues,
-                    ProgressOnThisPlatform = entity.ProgressOnThisPlatform
-                });
-            }
-            return dtoResult;
-        }
 
         /*
         [HttpGet("{id}")]
