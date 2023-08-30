@@ -9,42 +9,37 @@ namespace DemoWebApiProject.Utilities
 
         public static List<GameProgressDto> MannualMapperFromGameProgressEntityToDto(IEnumerable<GameProgress> entities)
         {
-            var dtoResult = new List<GameProgressDto>();
+            var dtoList = new List<GameProgressDto>();
             foreach (var entity in entities)
             {
-                dtoResult.Add(new GameProgressDto
+                dtoList.Add(new GameProgressDto
                 {
                     Id = entity.GameId
-                    ,
-                    Name = entity.Name
-                    ,
-                    ChineseName = entity.ChineseName
-                    ,
-                    EnglishName = entity.EnglishName
-                    ,
-                    Description = entity.Description
-                    ,
-                    GameProgressOnPlatforms = MannualMapperFromGameProgressOnPlatformEntityToDto(entity.GameProgressOnPlatforms)
+                    ,Name = entity.Name
+                    ,ChineseName = entity.ChineseName
+                    ,EnglishName = entity.EnglishName
+                    ,Description = entity.Description
+                    ,GameProgressOnPlatforms = MannualMapperFromGameProgressOnPlatformEntityToDto(entity.GameProgressOnPlatforms)
                 });
             }
-            return dtoResult;
+            return dtoList;
         }
 
         public static List<GameProgressOnPlatformDto> MannualMapperFromGameProgressOnPlatformEntityToDto(IEnumerable<GameProgressOnPlatform> entities)
         {
-            var dtoResult = new List<GameProgressOnPlatformDto>();
+            var dtoList = new List<GameProgressOnPlatformDto>();
             foreach (var entity in entities)
             {
-                dtoResult.Add(new GameProgressOnPlatformDto
+                dtoList.Add(new GameProgressOnPlatformDto
                 {
-                    Id = entity.GameProgressOnThisPlatformId,
-                    Platform = entity.Platform,
-                    RecommendedMouseSpeed = entity.RecommendedMouseSpeed,
-                    BugsAndIssues = entity.BugsAndIssues,
-                    ProgressOnThisPlatform = entity.ProgressOnThisPlatform
+                    Id = entity.GameProgressOnThisPlatformId
+                    ,Platform = entity.Platform
+                    ,RecommendedMouseSpeed = entity.RecommendedMouseSpeed
+                    ,BugsAndIssues = entity.BugsAndIssues
+                    ,ProgressOnThisPlatform = entity.ProgressOnThisPlatform
                 });
             }
-            return dtoResult;
+            return dtoList;
         }
     }
 }

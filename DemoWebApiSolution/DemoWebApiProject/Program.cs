@@ -41,6 +41,8 @@ builder.Services.AddDbContext<GameProgressContext>(dbContextOptions => dbContext
 
 builder.Services.AddScoped<IGameProgressRepository, GameProgressRepository>();
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

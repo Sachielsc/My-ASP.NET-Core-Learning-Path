@@ -5,6 +5,7 @@ using DemoWebApiProject.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using DemoWebApiProject.Utilities;
+using AutoMapper;
 
 namespace DemoWebApiProject.Controllers
 {
@@ -14,11 +15,13 @@ namespace DemoWebApiProject.Controllers
     {
         private readonly ILogger<GameProgressDemoController> _logger;
         private readonly IGameProgressRepository _gameProgressRepository; // DI here, thus this has to be an interface, not a class
+        private readonly IMapper _mapper;
 
-        public GameProgressDemoController(ILogger<GameProgressDemoController> logger, IGameProgressRepository gameProgressRepository)
+        public GameProgressDemoController(ILogger<GameProgressDemoController> logger, IGameProgressRepository gameProgressRepository, IMapper mapper)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _gameProgressRepository = gameProgressRepository ?? throw new ArgumentNullException(nameof(gameProgressRepository));
+            _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
         [HttpGet]
@@ -28,6 +31,10 @@ namespace DemoWebApiProject.Controllers
 
             // Use some manual object mapping methods here
             var dtoResult = ControllerHelper.MannualMapperFromGameProgressEntityToDto(entityResult);
+
+            // Use automapper
+            //var dtoResult = _mapper.Map<IEnumerable<GameProgressDto>>(entityResult);
+
             return Ok(dtoResult);
         }
 

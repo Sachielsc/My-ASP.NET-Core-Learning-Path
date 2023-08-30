@@ -16,7 +16,9 @@ namespace DemoWebApiProject.Services
 
         public async Task<IEnumerable<GameProgress>> GetGameProgressesAsync()
         {
-            return await _gameProgressContext.GameProgresses.OrderBy(g => g.Name).ToListAsync();
+            return await _gameProgressContext.GameProgresses.OrderBy(g => g.Name)
+                .Include(g => g.GameProgressOnPlatforms)
+                .ToListAsync();
         }
 
         public async Task<GameProgress?> GetGameProgressAsync(int gameId)
