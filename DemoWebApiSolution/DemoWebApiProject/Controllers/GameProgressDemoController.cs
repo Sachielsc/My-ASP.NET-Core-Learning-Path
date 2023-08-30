@@ -29,11 +29,12 @@ namespace DemoWebApiProject.Controllers
         {
             var entityResult = await _gameProgressRepository.GetGameProgressesAsync();
 
-            // Use some manual object mapping methods here
-            var dtoResult = ControllerHelper.MannualMapperFromGameProgressEntityToDto(entityResult);
+            // There are 2 ways we can do the object mapping here:
+            // 1. Use some manual object mapping methods here
+            //var dtoResult = ControllerHelper.MannualMapperFromGameProgressEntityToDto(entityResult);
 
-            // Use automapper
-            //var dtoResult = _mapper.Map<IEnumerable<GameProgressDto>>(entityResult);
+            // 2. Use automapper
+            var dtoResult = _mapper.Map<IEnumerable<GameProgressDto>>(entityResult);
 
             return Ok(dtoResult);
         }
