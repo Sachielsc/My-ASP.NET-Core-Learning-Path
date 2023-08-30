@@ -37,7 +37,7 @@ namespace DemoWebApiProject.DbContexts
                     Name = "暗黑破坏神2重制版 D2R",
                     EnglishName = "Diablo® II: Resurrected",
                     ChineseName = "暗黑破坏神2重制版",
-                    Description = "童年经典的完美重现\n而且现在还在更新平衡性补丁以及新内容",
+                    Description = "童年经典的完美重现。而且现在还在更新平衡性补丁以及新内容",
                     Year = 2022
                 }
                 );
@@ -52,7 +52,7 @@ namespace DemoWebApiProject.DbContexts
                     GameProgressOnThisPlatformId = 2,
                     GameId = 3,
                     Platform = "PC",
-                    ProgressOnThisPlatform = "联机模式下七职业慢慢交易以及慢慢刷\n单机模式下普通模式正在打造最强配置，硬核模式下考虑导入极品黄以及老版本暗金进行娱乐",
+                    ProgressOnThisPlatform = "联机模式下七职业慢慢交易以及慢慢刷。单机模式下普通模式正在打造最强配置，硬核模式下考虑导入极品黄以及老版本暗金进行娱乐",
                     BugsAndIssues = "坑爹的暴雪大幅下调了暴率"
                 }
                 );
