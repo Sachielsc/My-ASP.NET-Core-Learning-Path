@@ -51,8 +51,8 @@ namespace DemoWebApiProject.Controllers
 
                 if (!await _gameProgressRepository.GameExistsAsync(id))
                 {
-                    _logger.LogInformation($"The game with game progress id {id} doesn't exist ... ");
-                    return NotFound();
+                    _logger.LogInformation($"The game with game progress id {id} does NOT exist ... ");
+                    return NotFound($"Status code 404! The game with game progress id {id} does NOT exist ... ");
                 }
 
                 var entityResult = await _gameProgressRepository.GetGameProgressAsync(id);
@@ -67,14 +67,13 @@ namespace DemoWebApiProject.Controllers
             }
         }
 
-
         [HttpGet("{id}/gameprogressesonplatform")]
         public async Task <ActionResult<IEnumerable<GameProgressOnPlatformDto>>> GetAllGameProgressesOfASpecificGame(int id)
         {
             if (!await _gameProgressRepository.GameExistsAsync(id))
             {
-                _logger.LogInformation($"The game with game progress id {id} doesn't exist ... ");
-                return NotFound();
+                _logger.LogInformation($"The game with game progress id {id} does NOT exist ... ");
+                return NotFound($"Status code 404! The game with game progress id {id} does NOT exist ... ");
             }
 
             var entityResult = await _gameProgressRepository.GetGameProgressesOnPlatformsAsync(id);
@@ -82,20 +81,27 @@ namespace DemoWebApiProject.Controllers
             return Ok(dtoResult);
         }
 
-        /*
         [HttpGet("{id}/gameprogressesonplatform/{platformName}")]
-        public ActionResult<GameProgressOnPlatformDto> GetASpecificGameProgressOfASpecificGame(int id, string platformName)
+        public async Task<ActionResult<GameProgressOnPlatformDto>> GetASpecificGameProgressOfASpecificGame(int id, string platformName)
         {
-            var gameProgressToReturn = _gameProgressRepository.GameProgresses.FirstOrDefault(c => c.Id == id);
-            if (gameProgressToReturn == null) { return NotFound(); }
-            else
+            if (!await _gameProgressRepository.GameExistsAsync(id))
             {
-                var gameProgressOnPlatformToReturn = gameProgressToReturn.GameProgressOnPlatforms.FirstOrDefault(c => c.Platform == platformName);
-                if (gameProgressOnPlatformToReturn == null) { return NotFound(); }
-                else
-                    return gameProgressOnPlatformToReturn;
+                _logger.LogInformation($"The game with game progress id {id} does NOT exist ... ");
+                return NotFound($"Status code 404! The game with game progress id {id} does NOT exist ... ");
             }
+
+            var gameProgressOnPlatformEntity = await _gameProgressRepository.GetGameProgressesOnPlatformsAsync(id);
+
+            bool targetExists = gameProgressOnPlatformEntity.Any(entity => entity.Platform == platformName);
+
+            if (!targetExists)
+            {
+                return NotFound($"Status code 404! The game with game progress id {id} does exist. However, its game progress does NOT exist on the platform {platformName} ... ");
+            }
+
+            var entityResult = await _gameProgressRepository.GetGameProgressOnPlatformAsync(id, platformName);
+            var dtoResult = _mapper.Map<GameProgressOnPlatformDto>(entityResult);
+            return Ok(dtoResult);
         }
-        */
     }
 }

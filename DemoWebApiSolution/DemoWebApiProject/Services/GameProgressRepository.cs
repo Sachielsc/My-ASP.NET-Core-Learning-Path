@@ -42,6 +42,13 @@ namespace DemoWebApiProject.Services
                 .FirstOrDefaultAsync();
         }
 
+        public async Task<GameProgressOnPlatform?> GetGameProgressOnPlatformAsync(int gameId, string platformName)
+        {
+            return await _gameProgressContext.GameProgressOnPlatforms
+                .Where(g => g.GameId == gameId && g.Platform == platformName)
+                .FirstOrDefaultAsync();
+        }
+
         public async Task<bool> GameExistsAsync(int gameId)
         {
             return await _gameProgressContext.GameProgresses.AnyAsync(g => g.GameId == gameId);
