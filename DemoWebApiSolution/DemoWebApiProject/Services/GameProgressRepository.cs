@@ -35,12 +35,15 @@ namespace DemoWebApiProject.Services
                 .ToListAsync();
         }
 
+        // Not used. Btw, in the controller folder, 2 controller methods with the same name will cause an error
+        /*
         public async Task<GameProgressOnPlatform?> GetGameProgressOnPlatformAsync(int gameId, int gameProgressOnThisPlatformId)
         {
             return await _gameProgressContext.GameProgressOnPlatforms
                 .Where(g => g.GameId == gameId && g.GameProgressOnThisPlatformId == gameProgressOnThisPlatformId)
                 .FirstOrDefaultAsync();
         }
+        */
 
         public async Task<GameProgressOnPlatform?> GetGameProgressOnPlatformAsync(int gameId, string platformName)
         {
