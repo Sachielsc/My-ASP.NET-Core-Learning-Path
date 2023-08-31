@@ -41,5 +41,10 @@ namespace DemoWebApiProject.Services
                 .Where(g => g.GameId == gameId && g.GameProgressOnThisPlatformId == gameProgressOnThisPlatformId)
                 .FirstOrDefaultAsync();
         }
+
+        public async Task<bool> GameExistsAsync(int gameId)
+        {
+            return await _gameProgressContext.GameProgresses.AnyAsync(g => g.GameId == gameId);
+        }
     }
 }

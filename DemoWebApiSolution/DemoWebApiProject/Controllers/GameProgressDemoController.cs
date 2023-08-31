@@ -39,29 +39,35 @@ namespace DemoWebApiProject.Controllers
             return Ok(dtoResult);
         }
 
-
-        /*
         [HttpGet("{id}")]
-        public ActionResult<GameProgressDto> GetASpecificGameProgress(int id)
+        public async Task<ActionResult<GameProgressDto>> GetASpecificGameProgress(int id, bool throwSampleExceptionInThisMethod = false)
         {
-            try {
-                // throw new Exception("Sample exception ...");
-                var gameProgressToReturn = _gameProgressRepository.GameProgresses.FirstOrDefault(
-    c => c.Id == id
-    );
-                if (gameProgressToReturn == null)
+            try
+            {
+                if (throwSampleExceptionInThisMethod)
                 {
-                    _logger.LogInformation($"The city with city id {id} cannot be found ... ");
+                    throw new Exception("This is a sample exception to test status code 500 ...");
+                }
+
+                if (!await _gameProgressRepository.GameExistsAsync(id))
+                {
+                    _logger.LogInformation($"The game with game progress id {id} doesn't exist ... ");
                     return NotFound();
                 }
-                else return Ok(gameProgressToReturn);
+
+                var entityResult = await _gameProgressRepository.GetGameProgressAsync(id);
+                var dtoResult = _mapper.Map<GameProgressDto>(entityResult);
+                return Ok(dtoResult);
             }
-            catch (Exception ex) {
-                _logger.LogCritical($"Exception detected while getting the city with id {id}.\nException content: ", ex);
+
+            catch (Exception ex)
+            {
+                _logger.LogCritical($"Exception detected while getting the game with id {id}.\nException content: ", ex);
                 return StatusCode(500, "Only this message will be returned to the consumer as the API implementation details should not be exposed. ");
             }
         }
 
+        /*
         [HttpGet("{id}/gameprogressesonplatform")]
         public ActionResult<IEnumerable<GameProgressOnPlatformDto>> GetAllGameProgressesOfASpecificGame(int id)
         {

@@ -8,5 +8,6 @@ namespace DemoWebApiProject.Services
         Task<GameProgress?> GetGameProgressAsync(int gameId);
         Task<IEnumerable<GameProgressOnPlatform>> GetGameProgressesOnPlatformsAsync(int gameId);
         Task<GameProgressOnPlatform?> GetGameProgressOnPlatformAsync(int gameId, int gameProgressOnThisPlatformId);
+        Task<bool> GameExistsAsync(int gameId);
     }
 }
