@@ -388,3 +388,53 @@ In ASP.NET Core's dependency injection (DI) system, there are three main types o
   - Singleton: Can lead to memory retention, potentially causing memory leaks if not managed properly.
 
 Choosing the appropriate lifetime for your services depends on the nature of the service and the behavior you need in your application. Careful consideration of these lifetimes helps you optimize performance and resource utilization in your ASP.NET Core application.
+
+## What's the difference between List<T> and IEnumerable<T> in C#?
+Both `List<T>` and `IEnumerable<T>` are related to collections in C#, but they serve different purposes and have different characteristics. Here's the difference between them:
+
+1. **`List<T>`:**
+   `List<T>` is a concrete implementation of the generic `List<T>` class provided by the `System.Collections.Generic` namespace. It is a dynamic array that can grow or shrink in size as needed. It allows you to store elements of the specified type (`T`) in an ordered manner. Some key points about `List<T>` are:
+
+   - `List<T>` provides methods for adding, removing, and accessing elements efficiently.
+   - It supports random access, which means you can quickly access elements by index.
+   - It allows duplicate elements.
+   - It implements various collection-specific interfaces, making it suitable for operations like sorting, searching, and enumeration.
+   - `List<T>` is a mutable collection, meaning you can modify its contents after it's created.
+
+   Example:
+   ```csharp
+   List<int> numbers = new List<int>();
+   numbers.Add(1);
+   numbers.Add(2);
+   numbers.Add(3);
+   ```
+
+2. **`IEnumerable<T>`:**
+   `IEnumerable<T>` is an interface provided by the `System.Collections.Generic` namespace. It represents a sequence of elements that can be enumerated (iterated) using `foreach` or LINQ. It's the foundation for querying and manipulating collections. Some key points about `IEnumerable<T>` are:
+
+   - `IEnumerable<T>` represents a read-only sequence; you can't modify the underlying collection using the interface directly.
+   - It provides methods like `GetEnumerator()` to allow you to iterate through the collection.
+   - It's suitable for scenarios where you only need to iterate through the collection and don't require methods for adding or removing elements.
+   - LINQ operators and extension methods like `Where`, `Select`, etc., are designed to work with `IEnumerable<T>`.
+
+   Example:
+   ```csharp
+   IEnumerable<int> numbers = new List<int> { 1, 2, 3 };
+   foreach (var number in numbers)
+   {
+       Console.WriteLine(number);
+   }
+   ```
+
+In summary, `List<T>` is a specific implementation of a dynamic array that allows efficient addition, removal, and random access. `IEnumerable<T>`, on the other hand, is an interface representing a sequence of elements that you can iterate through using `foreach` or LINQ, but it doesn't provide methods for direct modification. Depending on your needs, you would choose the appropriate one to use.
+
+## What is the difference between 404 and 500
+HTTP status codes are three-digit numbers that the server returns to the client's browser or application to indicate the outcome of a request. The two status codes you mentioned, 404 and 500, represent different scenarios:
+
+1. **404 Not Found:**
+   This status code indicates that the server couldn't find the requested resource. In other words, the URL or resource the client is trying to access doesn't exist on the server. This could be due to a typo in the URL, a deleted or moved resource, or incorrect configuration on the server. The server is essentially saying, "I can't find what you're looking for."
+
+2. **500 Internal Server Error:**
+   This status code indicates that there was an issue on the server's side while processing the request, and the server was unable to fulfill the request as a result. This could be due to various reasons, such as a misconfiguration, a bug in the server software, or problems with the server's resources (like running out of memory or disk space). It's a more generic error that suggests something went wrong within the server, and the server is saying, "I encountered an error that I can't handle at the moment."
+
+In essence, the difference lies in whether the issue is on the client's side (404) or the server's side (500). A 404 error means the client's request is pointing to a non-existent resource, while a 500 error indicates that the server itself is encountering a problem that's preventing it from fulfilling the request.

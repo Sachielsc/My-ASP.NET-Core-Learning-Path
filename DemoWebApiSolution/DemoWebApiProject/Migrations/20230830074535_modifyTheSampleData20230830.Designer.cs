@@ -2,6 +2,7 @@
 using DemoWebApiProject.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DemoWebApiProject.Migrations
 {
     [DbContext(typeof(GameProgressContext))]
-    partial class GameProgressContextModelSnapshot : ModelSnapshot
+    [Migration("20230830074535_modifyTheSampleData20230830")]
+    partial class modifyTheSampleData20230830
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.10");
@@ -118,15 +121,6 @@ namespace DemoWebApiProject.Migrations
                             GameId = 3,
                             Platform = "PC",
                             ProgressOnThisPlatform = "联机模式下七职业慢慢交易以及慢慢刷。单机模式下普通模式正在打造最强配置，硬核模式下考虑导入极品黄以及老版本暗金进行娱乐",
-                            RecommendedMouseSpeed = "Undecided mouse speed"
-                        },
-                        new
-                        {
-                            GameProgressOnThisPlatformId = 3,
-                            BugsAndIssues = "Nintendo Switch平台的画质真的差，优化不敢想象",
-                            GameId = 3,
-                            Platform = "Nintendo Switch",
-                            ProgressOnThisPlatform = "有趣的地方在于，Nintendo Switch平台和PC平台共用暴雪账户，因此战网游戏存档是共通的。然而Nintendo Switch平台需要开通会员才能进行线上游戏",
                             RecommendedMouseSpeed = "Undecided mouse speed"
                         });
                 });

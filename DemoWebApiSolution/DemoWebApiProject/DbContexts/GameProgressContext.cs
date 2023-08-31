@@ -37,7 +37,7 @@ namespace DemoWebApiProject.DbContexts
                     Name = "暗黑破坏神2重制版 D2R",
                     EnglishName = "Diablo® II: Resurrected",
                     ChineseName = "暗黑破坏神2重制版",
-                    Description = "童年经典的完美重现\n而且现在还在更新平衡性补丁以及新内容",
+                    Description = "童年经典的完美重现。而且现在还在更新平衡性补丁以及新内容",
                     Year = 2022
                 }
                 );
@@ -52,8 +52,16 @@ namespace DemoWebApiProject.DbContexts
                     GameProgressOnThisPlatformId = 2,
                     GameId = 3,
                     Platform = "PC",
-                    ProgressOnThisPlatform = "联机模式下七职业慢慢交易以及慢慢刷\n单机模式下普通模式正在打造最强配置，硬核模式下考虑导入极品黄以及老版本暗金进行娱乐",
+                    ProgressOnThisPlatform = "联机模式下七职业慢慢交易以及慢慢刷。单机模式下普通模式正在打造最强配置，硬核模式下考虑导入极品黄以及老版本暗金进行娱乐",
                     BugsAndIssues = "坑爹的暴雪大幅下调了暴率"
+                },
+                new GameProgressOnPlatform()
+                {
+                    GameProgressOnThisPlatformId = 3,
+                    GameId = 3,
+                    Platform = "Nintendo Switch",
+                    ProgressOnThisPlatform = "有趣的地方在于，Nintendo Switch平台和PC平台共用暴雪账户，因此战网游戏存档是共通的。然而Nintendo Switch平台需要开通会员才能进行线上游戏",
+                    BugsAndIssues = "Nintendo Switch平台的画质真的差，优化不敢想象"
                 }
                 );
             base.OnModelCreating(modelBuilder);

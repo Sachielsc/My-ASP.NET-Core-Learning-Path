@@ -39,6 +39,10 @@ builder.Services.AddSingleton<GameProgressDataStore>();
 
 builder.Services.AddDbContext<GameProgressContext>(dbContextOptions => dbContextOptions.UseSqlite(builder.Configuration["ConnectionStrings:GameProgressDBConnectionString"]));
 
+builder.Services.AddScoped<IGameProgressRepository, GameProgressRepository>();
+
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
