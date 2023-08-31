@@ -67,17 +67,22 @@ namespace DemoWebApiProject.Controllers
             }
         }
 
-        /*
+
         [HttpGet("{id}/gameprogressesonplatform")]
-        public ActionResult<IEnumerable<GameProgressOnPlatformDto>> GetAllGameProgressesOfASpecificGame(int id)
+        public async Task <ActionResult<IEnumerable<GameProgressOnPlatformDto>>> GetAllGameProgressesOfASpecificGame(int id)
         {
-            var gameProgressToReturn = _gameProgressRepository.GameProgresses.FirstOrDefault(
-                c => c.Id == id
-                );
-            if (gameProgressToReturn == null) { return NotFound(); }
-            else return Ok(gameProgressToReturn.GameProgressOnPlatforms);
+            if (!await _gameProgressRepository.GameExistsAsync(id))
+            {
+                _logger.LogInformation($"The game with game progress id {id} doesn't exist ... ");
+                return NotFound();
+            }
+
+            var entityResult = await _gameProgressRepository.GetGameProgressesOnPlatformsAsync(id);
+            var dtoResult = _mapper.Map<IEnumerable<GameProgressOnPlatformDto>>(entityResult);
+            return Ok(dtoResult);
         }
 
+        /*
         [HttpGet("{id}/gameprogressesonplatform/{platformName}")]
         public ActionResult<GameProgressOnPlatformDto> GetASpecificGameProgressOfASpecificGame(int id, string platformName)
         {
