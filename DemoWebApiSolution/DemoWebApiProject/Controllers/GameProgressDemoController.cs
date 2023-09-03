@@ -90,11 +90,11 @@ namespace DemoWebApiProject.Controllers
                 return NotFound($"Status code 404! The game with game progress id {id} does NOT exist ... ");
             }
 
-            var gameProgressOnPlatformEntity = await _gameProgressRepository.GetGameProgressesOnPlatformsAsync(id);
+            //var gameProgressOnPlatformEntity = await _gameProgressRepository.GetGameProgressesOnPlatformsAsync(id);
 
-            bool targetExists = gameProgressOnPlatformEntity.Any(entity => entity.Platform == platformName);
+            //bool targetExists = gameProgressOnPlatformEntity.Any(entity => entity.Platform == platformName);
 
-            if (!targetExists)
+            if (!await _gameProgressRepository.GameProgressOnPlatformExistsAsync(id, platformName))
             {
                 return NotFound($"Status code 404! The game with game progress id {id} does exist. However, its game progress does NOT exist on the platform {platformName} ... ");
             }

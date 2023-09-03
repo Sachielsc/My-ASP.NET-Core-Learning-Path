@@ -56,5 +56,15 @@ namespace DemoWebApiProject.Services
         {
             return await _gameProgressContext.GameProgresses.AnyAsync(g => g.GameId == gameId);
         }
+
+        public async Task<bool> GameProgressOnPlatformExistsAsync(int gameId, string platformName)
+        {
+            return await _gameProgressContext.GameProgressOnPlatforms.AnyAsync(g => g.GameId == gameId && g.Platform == platformName);
+        }
+
+        public async Task<bool> GameProgressOnPlatformExistsAsync(int gameId, int gameProgressOnThisPlatformId)
+        {
+            return await _gameProgressContext.GameProgressOnPlatforms.AnyAsync(g => g.GameId == gameId && g.GameProgressOnThisPlatformId == gameProgressOnThisPlatformId);
+        }
     }
 }

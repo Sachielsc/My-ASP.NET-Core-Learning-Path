@@ -10,5 +10,7 @@ namespace DemoWebApiProject.Services
         //Task<GameProgressOnPlatform?> GetGameProgressOnPlatformAsync(int gameId, int gameProgressOnThisPlatformId);
         Task<GameProgressOnPlatform?> GetGameProgressOnPlatformAsync(int gameId, string platformName);
         Task<bool> GameExistsAsync(int gameId);
+        Task<bool> GameProgressOnPlatformExistsAsync(int gameId, int gameProgressOnPlatformId);
+        Task<bool> GameProgressOnPlatformExistsAsync(int gameId, string platformName);
     }
 }

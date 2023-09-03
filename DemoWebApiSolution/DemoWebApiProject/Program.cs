@@ -50,6 +50,19 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.Use(async (context, next) =>
+    {
+        // Check if the request path is the root path '/'
+        if (context.Request.Path == "/")
+        {
+            // Redirect to the Swagger URL
+            context.Response.Redirect("/swagger/index.html");
+            return;
+        }
+
+        // If it's not the root path, continue processing the request
+        await next();
+    });
 }
 
 app.UseHttpsRedirection();
