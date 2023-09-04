@@ -35,7 +35,7 @@ builder.Services.AddTransient<IDummyCustomizedServices, DummyCustomizedServicesL
 builder.Services.AddTransient<IDummyCustomizedServices, DummyCustomizedServicesCloud>();
 #endif
 
-builder.Services.AddSingleton<GameProgressDataStore>();
+//builder.Services.AddSingleton<GameProgressDataStore>();
 
 builder.Services.AddDbContext<GameProgressContext>(dbContextOptions => dbContextOptions.UseSqlite(builder.Configuration["ConnectionStrings:GameProgressDBConnectionString"]));
 
