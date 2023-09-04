@@ -52,23 +52,13 @@ namespace DemoWebApiProject.Services
 
         public async Task AddProgressOnPlatformAsync(int gameId, GameProgressOnPlatform gameProgressOnPlatform)
         {
-            var gameProgress = await GetGameProgressAsync(gameId);
-            if (gameProgress != null)
-            {
-                gameProgress.GameProgressOnPlatforms.Add(gameProgressOnPlatform);
-                await ApplyDbContextChangeToDatabaseAsync();
-            }
+            await AddProgressOnPlatformInternalAsync(gameId, gameProgressOnPlatform);
         }
 
         public async Task AddProgressOnPlatformAsync(GameProgressOnPlatform gameProgressOnPlatform)
         {
             int gameId = gameProgressOnPlatform.GameId;
-            var gameProgress = await GetGameProgressAsync(gameId);
-            if (gameProgress != null)
-            {
-                gameProgress.GameProgressOnPlatforms.Add(gameProgressOnPlatform);
-                await ApplyDbContextChangeToDatabaseAsync();
-            }
+            await AddProgressOnPlatformInternalAsync(gameId, gameProgressOnPlatform);
         }
 
         public async Task<int> ApplyDbContextChangeToDatabaseAsync()
@@ -89,6 +79,16 @@ namespace DemoWebApiProject.Services
         public async Task<bool> GameProgressOnPlatformExistsAsync(int gameId, int gameProgressOnPlatformId)
         {
             return await _gameProgressContext.GameProgressOnPlatforms.AnyAsync(g => g.GameId == gameId && g.GameProgressOnThisPlatformId == gameProgressOnPlatformId);
+        }
+
+        private async Task AddProgressOnPlatformInternalAsync(int gameId, GameProgressOnPlatform gameProgressOnPlatform)
+        {
+            var gameProgress = await GetGameProgressAsync(gameId);
+            if (gameProgress != null)
+            {
+                gameProgress.GameProgressOnPlatforms.Add(gameProgressOnPlatform);
+                await ApplyDbContextChangeToDatabaseAsync();
+            }
         }
     }
 }

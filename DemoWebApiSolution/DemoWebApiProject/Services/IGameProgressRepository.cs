@@ -17,6 +17,5 @@ namespace DemoWebApiProject.Services
         Task AddProgressOnPlatformAsync(int gameId, GameProgressOnPlatform gameProgressOnPlatform);
         Task AddProgressOnPlatformAsync(GameProgressOnPlatform gameProgressOnPlatform);
         Task<int> ApplyDbContextChangeToDatabaseAsync();
-
     }
 }
