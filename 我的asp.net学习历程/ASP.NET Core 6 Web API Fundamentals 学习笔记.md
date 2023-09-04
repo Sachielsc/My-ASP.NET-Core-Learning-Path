@@ -59,6 +59,8 @@ It's important to note that while DTOs provide benefits, they can also introduce
 - { get; set; }:<br>
 This is the property accessor syntax in C#.
 
+## (TODO) What are the properties of a C# class, and how does that work with OOP's encapsulation
+
 ## What is the difference between Icollection and Ienumerable
 `ICollection` and `IEnumerable` are both interfaces in the .NET Framework that represent collections of items. They are part of the collections framework and provide different levels of functionality.
 

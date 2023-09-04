@@ -1,7 +1,6 @@
 ﻿using DemoWebApiProject.DbContexts;
 using DemoWebApiProject.Entities;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace DemoWebApiProject.Services
 {
@@ -44,11 +43,26 @@ namespace DemoWebApiProject.Services
 
         // Not used. This should be implemented as a filter/search feature.
         // Btw, in the controller folder, 2 controller methods with the same name will cause an error
-        public async Task<GameProgressOnPlatform?> GetGameProgressOnPlatformAsync(int gameId, string platformName)
+        //public async Task<GameProgressOnPlatform?> GetGameProgressOnPlatformAsync(int gameId, string platformName)
+        //{
+        //    return await _gameProgressContext.GameProgressOnPlatforms
+        //        .Where(g => g.GameId == gameId && g.Platform == platformName)
+        //        .FirstOrDefaultAsync();
+        //}
+
+        public async Task AddProgressOnPlatformAsync(int gameId, GameProgressOnPlatform gameProgressOnPlatform)
         {
-            return await _gameProgressContext.GameProgressOnPlatforms
-                .Where(g => g.GameId == gameId && g.Platform == platformName)
-                .FirstOrDefaultAsync();
+            var gameProgress = await GetGameProgressAsync(gameId);
+            if (gameProgress != null)
+            {
+                gameProgress.GameProgressOnPlatforms.Add(gameProgressOnPlatform);
+                await ApplyDbContextChangeToDatabaseAsync();
+            }
+        }
+
+        public async Task<int> ApplyDbContextChangeToDatabaseAsync()
+        {
+            return await _gameProgressContext.SaveChangesAsync();
         }
 
         public async Task<bool> GameExistsAsync(int gameId)
@@ -61,9 +75,9 @@ namespace DemoWebApiProject.Services
             return await _gameProgressContext.GameProgressOnPlatforms.AnyAsync(g => g.GameId == gameId && g.Platform == platformName);
         }
 
-        public async Task<bool> GameProgressOnPlatformExistsAsync(int gameId, int gameProgressOnThisPlatformId)
+        public async Task<bool> GameProgressOnPlatformExistsAsync(int gameId, int gameProgressOnPlatformId)
         {
-            return await _gameProgressContext.GameProgressOnPlatforms.AnyAsync(g => g.GameId == gameId && g.GameProgressOnThisPlatformId == gameProgressOnThisPlatformId);
+            return await _gameProgressContext.GameProgressOnPlatforms.AnyAsync(g => g.GameId == gameId && g.GameProgressOnThisPlatformId == gameProgressOnPlatformId);
         }
     }
 }

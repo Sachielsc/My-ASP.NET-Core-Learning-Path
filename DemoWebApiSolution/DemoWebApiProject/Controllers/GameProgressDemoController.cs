@@ -1,11 +1,8 @@
-﻿using DemoWebApiProject.Entities;
-using DemoWebApiProject.MockData;
+﻿using AutoMapper;
+using DemoWebApiProject.Entities;
 using DemoWebApiProject.Models;
 using DemoWebApiProject.Services;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using DemoWebApiProject.Utilities;
-using AutoMapper;
 
 namespace DemoWebApiProject.Controllers
 {
@@ -33,14 +30,14 @@ namespace DemoWebApiProject.Controllers
             // 1. Use some manual object mapping methods here
             //var dtoResult = ControllerHelper.MannualMapperFromGameProgressEntityToDto(entityResult);
 
-            // 2. Use automapper
+            // 2. Use automapper (The preferred way)
             var dtoResult = _mapper.Map<IEnumerable<GameProgressDto>>(entityResult);
 
             return Ok(dtoResult);
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<GameProgressDto>> GetASpecificGameProgress(int id, bool throwSampleExceptionInThisMethod = false)
+        [HttpGet("{gameId}")]
+        public async Task<ActionResult<GameProgressDto>> GetASpecificGameProgress(int gameId, bool throwSampleExceptionInThisMethod = false)
         {
             try
             {
@@ -49,53 +46,53 @@ namespace DemoWebApiProject.Controllers
                     throw new Exception("This is a sample exception to test status code 500 ...");
                 }
 
-                if (!await _gameProgressRepository.GameExistsAsync(id))
+                if (!await _gameProgressRepository.GameExistsAsync(gameId))
                 {
-                    _logger.LogInformation($"The game with game progress id {id} does NOT exist ... ");
-                    return NotFound($"Status code 404! The game with game progress id {id} does NOT exist ... ");
+                    _logger.LogInformation($"The game with game gameId {gameId} does NOT exist ... ");
+                    return NotFound($"Status code 404! The game with game gameId {gameId} does NOT exist ... ");
                 }
 
-                var entityResult = await _gameProgressRepository.GetGameProgressAsync(id);
+                var entityResult = await _gameProgressRepository.GetGameProgressAsync(gameId);
                 var dtoResult = _mapper.Map<GameProgressDto>(entityResult);
                 return Ok(dtoResult);
             }
 
             catch (Exception ex)
             {
-                _logger.LogCritical($"Exception detected while getting the game with id {id}.\nException content: ", ex);
+                _logger.LogCritical($"Exception detected while getting the game with gameId {gameId}.\nException content: ", ex);
                 return StatusCode(500, "Only this message will be returned to the consumer as the API implementation details should not be exposed. ");
             }
         }
 
-        [HttpGet("{id}/gameprogressesonplatform")]
-        public async Task <ActionResult<IEnumerable<GameProgressOnPlatformDto>>> GetAllGameProgressesOfASpecificGame(int id)
+        [HttpGet("{gameId}/gameprogressesonplatform")]
+        public async Task<ActionResult<IEnumerable<GameProgressOnPlatformDto>>> GetAllGameProgressesOfASpecificGame(int gameId)
         {
-            if (!await _gameProgressRepository.GameExistsAsync(id))
+            if (!await _gameProgressRepository.GameExistsAsync(gameId))
             {
-                _logger.LogInformation($"The game with game progress id {id} does NOT exist ... ");
-                return NotFound($"Status code 404! The game with game progress id {id} does NOT exist ... ");
+                _logger.LogInformation($"The game with game ID {gameId} does NOT exist ... ");
+                return NotFound($"Status code 404! The game with game ID {gameId} does NOT exist ... ");
             }
 
-            var entityResult = await _gameProgressRepository.GetGameProgressesOnPlatformsAsync(id);
+            var entityResult = await _gameProgressRepository.GetGameProgressesOnPlatformsAsync(gameId);
             var dtoResult = _mapper.Map<IEnumerable<GameProgressOnPlatformDto>>(entityResult);
             return Ok(dtoResult);
         }
 
-        [HttpGet("{id}/gameprogressesonplatform/{gameProgressOnPlatformId}")]
-        public async Task<ActionResult<GameProgressOnPlatformDto>> GetASpecificGameProgressOfASpecificGame(int id, int gameProgressOnPlatformId)
+        [HttpGet("{gameId}/gameprogressesonplatform/{gameProgressOnPlatformId}", Name = "GetASpecificGameProgressOfASpecificGame")]
+        public async Task<ActionResult<GameProgressOnPlatformDto>> GetASpecificGameProgressOfASpecificGame(int gameId, int gameProgressOnPlatformId)
         {
-            if (!await _gameProgressRepository.GameExistsAsync(id))
+            if (!await _gameProgressRepository.GameExistsAsync(gameId))
             {
-                _logger.LogInformation($"The game with game progress id {id} does NOT exist ... ");
-                return NotFound($"Status code 404! The game with game progress id {id} does NOT exist ... ");
+                _logger.LogInformation($"The game with game ID {gameId} does NOT exist ... ");
+                return NotFound($"Status code 404! The game with game ID {gameId} does NOT exist ... ");
             }
 
-            if (!await _gameProgressRepository.GameProgressOnPlatformExistsAsync(id, gameProgressOnPlatformId))
+            if (!await _gameProgressRepository.GameProgressOnPlatformExistsAsync(gameId, gameProgressOnPlatformId))
             {
-                return NotFound($"Status code 404! The game with game progress id {id} does exist. However, its game progress does NOT exist on the specific platform you requested ... ");
+                return NotFound($"Status code 404! The game with game ID {gameId} does exist. However, its game progress does NOT exist on the specific platform you requested ... ");
             }
 
-            var entityResult = await _gameProgressRepository.GetGameProgressOnPlatformAsync(id, gameProgressOnPlatformId);
+            var entityResult = await _gameProgressRepository.GetGameProgressOnPlatformAsync(gameId, gameProgressOnPlatformId);
             var dtoResult = _mapper.Map<GameProgressOnPlatformDto>(entityResult);
             return Ok(dtoResult);
         }
@@ -103,24 +100,45 @@ namespace DemoWebApiProject.Controllers
         // Not used. This should be implemented as a filter/search feature.
         // Btw, in the controller folder, 2 controller methods with the same name will cause an error
         /*
-        [HttpGet("{id}/gameprogressesonplatform/{platformName}")]
-        public async Task<ActionResult<GameProgressOnPlatformDto>> GetASpecificGameProgressOfASpecificGame(int id, string platformName)
+        [HttpGet("{gameId}/gameprogressesonplatform/{platformName}")]
+        public async Task<ActionResult<GameProgressOnPlatformDto>> GetASpecificGameProgressOfASpecificGame(int gameId, string platformName)
         {
-            if (!await _gameProgressRepository.GameExistsAsync(id))
+            if (!await _gameProgressRepository.GameExistsAsync(gameId))
             {
-                _logger.LogInformation($"The game with game progress id {id} does NOT exist ... ");
-                return NotFound($"Status code 404! The game with game progress id {id} does NOT exist ... ");
+                _logger.LogInformation($"The game with game ID {gameId} does NOT exist ... ");
+                return NotFound($"Status code 404! The game with game ID {gameId} does NOT exist ... ");
             }
 
-            if (!await _gameProgressRepository.GameProgressOnPlatformExistsAsync(id, platformName))
+            if (!await _gameProgressRepository.GameProgressOnPlatformExistsAsync(gameId, platformName))
             {
-                return NotFound($"Status code 404! The game with game progress id {id} does exist. However, its game progress does NOT exist on the platform {platformName} ... ");
+                return NotFound($"Status code 404! The game with game ID {gameId} does exist. However, its game progress does NOT exist on the platform {platformName} ... ");
             }
 
-            var entityResult = await _gameProgressRepository.GetGameProgressOnPlatformAsync(id, platformName);
+            var entityResult = await _gameProgressRepository.GetGameProgressOnPlatformAsync(gameId, platformName);
             var dtoResult = _mapper.Map<GameProgressOnPlatformDto>(entityResult);
             return Ok(dtoResult);
         }
         */
+
+        [HttpPost]
+        public async Task<ActionResult<GameProgressOnPlatformDto>> CreateAGameProgressForASpecificGame(int gameId, GameProgressOnPlatformDto gameProgressOnPlatformDto)
+        {
+            if (!await _gameProgressRepository.GameExistsAsync(gameId))
+            {
+                _logger.LogInformation($"The game with game ID {gameId} does NOT exist ... ");
+                return NotFound($"Status code 404! The game with game ID {gameId} does NOT exist ... ");
+            }
+
+            var createdGameProgressOnPlatformEntity = _mapper.Map<GameProgressOnPlatform>(gameProgressOnPlatformDto);
+            await _gameProgressRepository.AddProgressOnPlatformAsync(gameId, createdGameProgressOnPlatformEntity);
+            var createdGameProgressOnPlatformDto = _mapper.Map<GameProgressOnPlatformDto>(createdGameProgressOnPlatformEntity);
+            return CreatedAtRoute("GetASpecificGameProgressOfASpecificGame",
+                new
+                {
+                    gameId = createdGameProgressOnPlatformDto.GameId,
+                    gameProgressOnPlatformId = createdGameProgressOnPlatformDto.Id
+                },
+                createdGameProgressOnPlatformDto);
+        }
     }
 }
