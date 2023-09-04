@@ -330,6 +330,8 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
 
+# Misc
 *.DS_Store
-
 target
+**/*.db-shm
+**/*.db-wal
