@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DemoWebApiProject.Controllers
 {
     [ApiController]
-    [Route("api/gameprogresses")]
+    [Route("api/[controller]")]  // or we can hard code this like: [Route("api/gameProgresses")]
     public class GameProgressDemoController : ControllerBase
     {
         private readonly ILogger<GameProgressDemoController> _logger;
@@ -120,23 +120,46 @@ namespace DemoWebApiProject.Controllers
         }
         */
 
-        [HttpPost]
-        public async Task<ActionResult<GameProgressOnPlatformDto>> CreateAGameProgressForASpecificGame(int gameId, GameProgressOnPlatformDto gameProgressOnPlatformDto)
+        // Not used. As I don't want gameId as another parameter
+        //[HttpPost]
+        //public async Task<ActionResult<GameProgressOnPlatformDto>> CreateAGameProgressForASpecificGame(int gameId, GameProgressOnPlatformDto gameProgressOnPlatformDto)
+        //{
+        //    if (!await _gameProgressRepository.GameExistsAsync(gameId))
+        //    {
+        //        _logger.LogInformation($"The game with game ID {gameId} does NOT exist ... ");
+        //        return NotFound($"Status code 404! The game with game ID {gameId} does NOT exist ... ");
+        //    }
+
+        //    var createdGameProgressOnPlatformEntity = _mapper.Map<GameProgressOnPlatform>(gameProgressOnPlatformDto);
+        //    await _gameProgressRepository.AddProgressOnPlatformAsync(gameId, createdGameProgressOnPlatformEntity);
+        //    var createdGameProgressOnPlatformDto = _mapper.Map<GameProgressOnPlatformDto>(createdGameProgressOnPlatformEntity);
+        //    return CreatedAtRoute("GetASpecificGameProgressOfASpecificGame",
+        //        new
+        //        {
+        //            gameId = createdGameProgressOnPlatformDto.GameId,
+        //            gameProgressOnPlatformId = createdGameProgressOnPlatformDto.GameProgressOnPlatformId
+        //        },
+        //        createdGameProgressOnPlatformDto);
+        //}
+
+        [HttpPost("gameprogressesonplatform")]
+        public async Task<ActionResult<GameProgressOnPlatformDto>> CreateAGameProgressForASpecificGame(GameProgressOnPlatformDto gameProgressOnPlatformDto)
         {
-            if (!await _gameProgressRepository.GameExistsAsync(gameId))
+            int createdGameId = gameProgressOnPlatformDto.GameId;
+            if (!await _gameProgressRepository.GameExistsAsync(createdGameId))
             {
-                _logger.LogInformation($"The game with game ID {gameId} does NOT exist ... ");
-                return NotFound($"Status code 404! The game with game ID {gameId} does NOT exist ... ");
+                _logger.LogInformation($"The game with game ID {createdGameId} does NOT exist ... ");
+                return NotFound($"Status code 404! The game with game ID {createdGameId} does NOT exist ... ");
             }
 
             var createdGameProgressOnPlatformEntity = _mapper.Map<GameProgressOnPlatform>(gameProgressOnPlatformDto);
-            await _gameProgressRepository.AddProgressOnPlatformAsync(gameId, createdGameProgressOnPlatformEntity);
+            await _gameProgressRepository.AddProgressOnPlatformAsync(createdGameProgressOnPlatformEntity);
             var createdGameProgressOnPlatformDto = _mapper.Map<GameProgressOnPlatformDto>(createdGameProgressOnPlatformEntity);
             return CreatedAtRoute("GetASpecificGameProgressOfASpecificGame",
                 new
                 {
-                    gameId = createdGameProgressOnPlatformDto.GameId,
-                    gameProgressOnPlatformId = createdGameProgressOnPlatformDto.Id
+                    gameId = createdGameId,
+                    gameProgressOnPlatformId = createdGameProgressOnPlatformDto.GameProgressOnPlatformId
                 },
                 createdGameProgressOnPlatformDto);
         }

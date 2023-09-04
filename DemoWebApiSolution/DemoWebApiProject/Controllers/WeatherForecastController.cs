@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DemoWebApiProject.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]

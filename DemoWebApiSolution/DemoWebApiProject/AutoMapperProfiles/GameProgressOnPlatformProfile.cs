@@ -7,9 +7,9 @@ namespace DemoWebApiProject.AutoMapperProfiles
         public GameProgressOnPlatformProfile()
         {
             CreateMap<Entities.GameProgressOnPlatform, Models.GameProgressOnPlatformDto>()
-                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.GameProgressOnThisPlatformId));
+                .ForMember(dest => dest.GameProgressOnPlatformId, opt => opt.MapFrom(src => src.GameProgressOnThisPlatformId));
             CreateMap<Models.GameProgressOnPlatformDto, Entities.GameProgressOnPlatform>()
-                .ForMember(dest => dest.GameProgressOnThisPlatformId, opt => opt.MapFrom(src => src.Id));
+                .ForMember(dest => dest.GameProgressOnThisPlatformId, opt => opt.MapFrom(src => src.GameProgressOnPlatformId));
         }
     }
 }

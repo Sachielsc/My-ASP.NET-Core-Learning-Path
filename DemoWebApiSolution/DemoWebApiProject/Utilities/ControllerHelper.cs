@@ -15,11 +15,16 @@ namespace DemoWebApiProject.Utilities
                 dtoList.Add(new GameProgressDto
                 {
                     Id = entity.GameId
-                    ,Name = entity.Name
-                    ,ChineseName = entity.ChineseName
-                    ,EnglishName = entity.EnglishName
-                    ,Description = entity.Description
-                    ,GameProgressOnPlatforms = MannualMapperFromGameProgressOnPlatformEntityToDto(entity.GameProgressOnPlatforms)
+                    ,
+                    Name = entity.Name
+                    ,
+                    ChineseName = entity.ChineseName
+                    ,
+                    EnglishName = entity.EnglishName
+                    ,
+                    Description = entity.Description
+                    ,
+                    GameProgressOnPlatforms = MannualMapperFromGameProgressOnPlatformEntityToDto(entity.GameProgressOnPlatforms)
                 });
             }
             return dtoList;
@@ -32,11 +37,15 @@ namespace DemoWebApiProject.Utilities
             {
                 dtoList.Add(new GameProgressOnPlatformDto
                 {
-                    Id = entity.GameProgressOnThisPlatformId
-                    ,Platform = entity.Platform
-                    ,RecommendedMouseSpeed = entity.RecommendedMouseSpeed
-                    ,BugsAndIssues = entity.BugsAndIssues
-                    ,ProgressOnThisPlatform = entity.ProgressOnThisPlatform
+                    GameProgressOnPlatformId = entity.GameProgressOnThisPlatformId
+                    ,
+                    Platform = entity.Platform
+                    ,
+                    RecommendedMouseSpeed = entity.RecommendedMouseSpeed
+                    ,
+                    BugsAndIssues = entity.BugsAndIssues
+                    ,
+                    ProgressOnThisPlatform = entity.ProgressOnThisPlatform
                 });
             }
             return dtoList;
