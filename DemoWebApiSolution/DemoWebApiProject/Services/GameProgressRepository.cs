@@ -70,6 +70,16 @@ namespace DemoWebApiProject.Services
             return await _gameProgressContext.GameProgressOnPlatforms.AnyAsync(g => g.GameId == gameId && g.GameProgressOnThisPlatformId == gameProgressOnPlatformId);
         }
 
+        public async Task DeleteProgressOnPlatformAsync(int gameProgressOnPlatformId)
+        {
+            GameProgressOnPlatform? gameProgressOnPlatformToBeRemoved = await GetGameProgressOnPlatformAsync(gameProgressOnPlatformId);
+            if (gameProgressOnPlatformToBeRemoved != null)
+            {
+                _gameProgressContext.GameProgressOnPlatforms.Remove(gameProgressOnPlatformToBeRemoved);
+                await ApplyDbContextChangeToDatabaseAsync();
+            }
+        }
+
         private async Task<int> ApplyDbContextChangeToDatabaseAsync()
         {
             return await _gameProgressContext.SaveChangesAsync();
@@ -84,6 +94,13 @@ namespace DemoWebApiProject.Services
                 gameProgress.GameProgressOnPlatforms.Add(gameProgressOnPlatform);
                 await ApplyDbContextChangeToDatabaseAsync();
             }
+        }
+
+        private async Task<GameProgressOnPlatform?> GetGameProgressOnPlatformAsync(int gameProgressOnThisPlatformId)
+        {
+            return await _gameProgressContext.GameProgressOnPlatforms
+                .Where(g => g.GameProgressOnThisPlatformId == gameProgressOnThisPlatformId)
+                .FirstOrDefaultAsync();
         }
     }
 }

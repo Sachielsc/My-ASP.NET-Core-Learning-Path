@@ -13,12 +13,14 @@ namespace DemoWebApiProject.Controllers
         private readonly ILogger<GameProgressDemoController> _logger;
         private readonly IGameProgressRepository _gameProgressRepository; // DI here, thus this has to be an interface, not a class
         private readonly IMapper _mapper;
+        private readonly IDummyCustomizedServices _dummyCustomizedServices;
 
-        public GameProgressDemoController(ILogger<GameProgressDemoController> logger, IGameProgressRepository gameProgressRepository, IMapper mapper)
+        public GameProgressDemoController(ILogger<GameProgressDemoController> logger, IGameProgressRepository gameProgressRepository, IMapper mapper, IDummyCustomizedServices dummyCustomizedServices)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _gameProgressRepository = gameProgressRepository ?? throw new ArgumentNullException(nameof(gameProgressRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
+            _dummyCustomizedServices = dummyCustomizedServices;
         }
 
         [HttpGet]
@@ -162,6 +164,25 @@ namespace DemoWebApiProject.Controllers
                     gameProgressOnPlatformId = createdGameProgressOnPlatformDto.GameProgressOnPlatformId
                 },
                 createdGameProgressOnPlatformDto);
+        }
+
+        [HttpDelete("{gameId}/gameprogressesonplatform/{gameProgressOnPlatformId}")]
+        public async Task<ActionResult> DeleteAGameProgressForASpecificGame(int gameId, int gameProgressOnPlatformId)
+        {
+            if (!await _gameProgressRepository.GameExistsAsync(gameId))
+            {
+                _logger.LogInformation($"The game with game ID {gameId} does NOT exist ... ");
+                return NotFound($"Status code 404! The game with game ID {gameId} does NOT exist ... ");
+            }
+
+            if (!await _gameProgressRepository.GameProgressOnPlatformExistsAsync(gameId, gameProgressOnPlatformId))
+            {
+                return NotFound($"Status code 404! The game with game ID {gameId} does exist. However, its game progress does NOT exist on the specific platform you requested ... ");
+            }
+
+            await _gameProgressRepository.DeleteProgressOnPlatformAsync(gameProgressOnPlatformId);
+            _dummyCustomizedServices.Send("Progress on platform deleted!", $"The game progress with a gameProgressOnPlatformId {gameProgressOnPlatformId} has been deleted!");
+            return NoContent();
         }
     }
 }
