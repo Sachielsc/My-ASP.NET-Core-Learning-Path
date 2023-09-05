@@ -43,27 +43,16 @@ namespace DemoWebApiProject.Services
 
         // Not used. This should be implemented as a filter/search feature.
         // Btw, in the controller folder, 2 controller methods with the same name will cause an error
-        //public async Task<GameProgressOnPlatform?> GetGameProgressOnPlatformAsync(int gameId, string platformName)
-        //{
-        //    return await _gameProgressContext.GameProgressOnPlatforms
-        //        .Where(g => g.GameId == gameId && g.Platform == platformName)
-        //        .FirstOrDefaultAsync();
-        //}
-
-        public async Task AddProgressOnPlatformAsync(int gameId, GameProgressOnPlatform gameProgressOnPlatform)
+        public async Task<GameProgressOnPlatform?> GetGameProgressOnPlatformAsync(int gameId, string platformName)
         {
-            await AddProgressOnPlatformInternalAsync(gameId, gameProgressOnPlatform);
+            return await _gameProgressContext.GameProgressOnPlatforms
+                .Where(g => g.GameId == gameId && g.Platform == platformName)
+                .FirstOrDefaultAsync();
         }
 
         public async Task AddProgressOnPlatformAsync(GameProgressOnPlatform gameProgressOnPlatform)
         {
-            int gameId = gameProgressOnPlatform.GameId;
-            await AddProgressOnPlatformInternalAsync(gameId, gameProgressOnPlatform);
-        }
-
-        public async Task<int> ApplyDbContextChangeToDatabaseAsync()
-        {
-            return await _gameProgressContext.SaveChangesAsync();
+            await AddProgressOnPlatformAsync(gameProgressOnPlatform.GameId, gameProgressOnPlatform);
         }
 
         public async Task<bool> GameExistsAsync(int gameId)
@@ -81,7 +70,13 @@ namespace DemoWebApiProject.Services
             return await _gameProgressContext.GameProgressOnPlatforms.AnyAsync(g => g.GameId == gameId && g.GameProgressOnThisPlatformId == gameProgressOnPlatformId);
         }
 
-        private async Task AddProgressOnPlatformInternalAsync(int gameId, GameProgressOnPlatform gameProgressOnPlatform)
+        private async Task<int> ApplyDbContextChangeToDatabaseAsync()
+        {
+            return await _gameProgressContext.SaveChangesAsync();
+        }
+
+        // Not used. As I don't want to use gameId as another parameter
+        private async Task AddProgressOnPlatformAsync(int gameId, GameProgressOnPlatform gameProgressOnPlatform)
         {
             var gameProgress = await GetGameProgressAsync(gameId);
             if (gameProgress != null)

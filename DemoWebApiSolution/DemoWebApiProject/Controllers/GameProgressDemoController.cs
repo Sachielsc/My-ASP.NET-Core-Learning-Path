@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace DemoWebApiProject.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]  // or we can hard code this like: [Route("api/gameProgresses")]
+    [Route("api/[controller]")]  // or we can hard code it like this: [Route("api/gameProgresses")]
     public class GameProgressDemoController : ControllerBase
     {
         private readonly ILogger<GameProgressDemoController> _logger;
@@ -120,7 +120,7 @@ namespace DemoWebApiProject.Controllers
         }
         */
 
-        // Not used. As I don't want gameId as another parameter
+        // Not used. As I don't want to use gameId as another parameter
         //[HttpPost]
         //public async Task<ActionResult<GameProgressOnPlatformDto>> CreateAGameProgressForASpecificGame(int gameId, GameProgressOnPlatformDto gameProgressOnPlatformDto)
         //{
