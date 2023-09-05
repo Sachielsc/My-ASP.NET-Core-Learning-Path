@@ -1,5 +1,6 @@
 using DemoWebApiProject.DbContexts;
 using DemoWebApiProject.MockData;
+using DemoWebApiProject.Repositories;
 using DemoWebApiProject.Services;
 using Microsoft.EntityFrameworkCore;
 using Serilog;

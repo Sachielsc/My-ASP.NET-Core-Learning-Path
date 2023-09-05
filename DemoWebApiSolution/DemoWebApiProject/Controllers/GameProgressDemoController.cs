@@ -2,6 +2,7 @@
 using DemoWebApiProject.Entities;
 using DemoWebApiProject.Models;
 using DemoWebApiProject.Services;
+using DemoWebApiProject.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DemoWebApiProject.Controllers
@@ -13,14 +14,12 @@ namespace DemoWebApiProject.Controllers
         private readonly ILogger<GameProgressDemoController> _logger;
         private readonly IGameProgressRepository _gameProgressRepository; // DI here, thus this has to be an interface, not a class
         private readonly IMapper _mapper;
-        private readonly IDummyCustomizedServices _dummyCustomizedServices;
 
-        public GameProgressDemoController(ILogger<GameProgressDemoController> logger, IGameProgressRepository gameProgressRepository, IMapper mapper, IDummyCustomizedServices dummyCustomizedServices)
+        public GameProgressDemoController(ILogger<GameProgressDemoController> logger, IGameProgressRepository gameProgressRepository, IMapper mapper)
         {
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
             _gameProgressRepository = gameProgressRepository ?? throw new ArgumentNullException(nameof(gameProgressRepository));
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-            _dummyCustomizedServices = dummyCustomizedServices;
         }
 
         [HttpGet]
@@ -181,7 +180,23 @@ namespace DemoWebApiProject.Controllers
             }
 
             await _gameProgressRepository.DeleteProgressOnPlatformAsync(gameProgressOnPlatformId);
-            _dummyCustomizedServices.Send("Progress on platform deleted!", $"The game progress with a gameProgressOnPlatformId {gameProgressOnPlatformId} has been deleted!");
+            return NoContent();
+        }
+
+        [HttpDelete("gameprogressesonplatform")]
+        public async Task<ActionResult> DeleteMultipleGameProgresses(int startGameId, int endGameId)
+        {
+            for (int i = startGameId; i <= endGameId; i++)
+            {
+                if (await _gameProgressRepository.GameProgressOnPlatformExistsAsync(i))
+                {
+                    await _gameProgressRepository.DeleteProgressOnPlatformAsync(i);
+                }
+                else
+                {
+                    _logger.LogInformation($"The game progress with game progress on platform ID {i} does NOT exist ... ");
+                }
+            }
             return NoContent();
         }
     }

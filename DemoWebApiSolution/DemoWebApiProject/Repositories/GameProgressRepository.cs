@@ -1,16 +1,20 @@
 ﻿using DemoWebApiProject.DbContexts;
 using DemoWebApiProject.Entities;
+using DemoWebApiProject.Services;
 using Microsoft.EntityFrameworkCore;
 
-namespace DemoWebApiProject.Services
+namespace DemoWebApiProject.Repositories
 {
     public class GameProgressRepository : IGameProgressRepository
     {
         private readonly GameProgressContext _gameProgressContext;
+        private readonly IDummyCustomizedServices _dummyCustomizedServices;
 
-        public GameProgressRepository(GameProgressContext gameProgressContext)
+        public GameProgressRepository(GameProgressContext gameProgressContext, IDummyCustomizedServices dummyCustomizedServices)
         {
             _gameProgressContext = gameProgressContext ?? throw new ArgumentNullException(nameof(gameProgressContext));
+            _dummyCustomizedServices = dummyCustomizedServices;
+
         }
 
         public async Task<IEnumerable<GameProgress>> GetGameProgressesAsync()
@@ -70,6 +74,11 @@ namespace DemoWebApiProject.Services
             return await _gameProgressContext.GameProgressOnPlatforms.AnyAsync(g => g.GameId == gameId && g.GameProgressOnThisPlatformId == gameProgressOnPlatformId);
         }
 
+        public async Task<bool> GameProgressOnPlatformExistsAsync(int gameProgressOnThisPlatformId)
+        {
+            return await _gameProgressContext.GameProgressOnPlatforms.AnyAsync(g => g.GameProgressOnThisPlatformId == gameProgressOnThisPlatformId);
+        }
+
         public async Task DeleteProgressOnPlatformAsync(int gameProgressOnPlatformId)
         {
             GameProgressOnPlatform? gameProgressOnPlatformToBeRemoved = await GetGameProgressOnPlatformAsync(gameProgressOnPlatformId);
@@ -77,6 +86,7 @@ namespace DemoWebApiProject.Services
             {
                 _gameProgressContext.GameProgressOnPlatforms.Remove(gameProgressOnPlatformToBeRemoved);
                 await ApplyDbContextChangeToDatabaseAsync();
+                _dummyCustomizedServices.Send("Progress on platform deleted!", $"The game progress with a gameProgressOnPlatformId {gameProgressOnPlatformId} has been deleted!");
             }
         }
 
