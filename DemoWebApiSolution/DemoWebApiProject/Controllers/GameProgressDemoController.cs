@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using DemoWebApiProject.Entities;
 using DemoWebApiProject.Models;
-using DemoWebApiProject.Services;
 using DemoWebApiProject.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
@@ -22,6 +21,10 @@ namespace DemoWebApiProject.Controllers
             _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
         }
 
+        /// <summary>
+        /// Get all game progresses with all their game progress on platform subclasses
+        /// </summary>
+        /// <returns>Return an enumerable of game progress Dtos</returns>
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GameProgressDto>>> GetAllGameProgresses()
         {
@@ -37,6 +40,12 @@ namespace DemoWebApiProject.Controllers
             return Ok(dtoResult);
         }
 
+        /// <summary>
+        /// Get a game progress with all its game progress on platform subclasses by the game id. Capable of throwing an exception here to test the Internal Server Error
+        /// </summary>
+        /// <param name="gameId">The game ID is required</param>
+        /// <param name="throwSampleExceptionInThisMethod">Throw an exception here to test the Internal Server Error. Default value is false</param>
+        /// <returns>A game progress Dto</returns>
         [HttpGet("{gameId}")]
         public async Task<ActionResult<GameProgressDto>> GetASpecificGameProgress(int gameId, bool throwSampleExceptionInThisMethod = false)
         {
@@ -65,6 +74,11 @@ namespace DemoWebApiProject.Controllers
             }
         }
 
+        /// <summary>
+        /// Get a list of game progress on platform subclasses for a certain game, by game ID. The only difference between this API and "GetASpecificGameProgress" is that this one will return an enumerable of game progress on platform Dtos instead
+        /// </summary>
+        /// <param name="gameId">The game ID is required</param>
+        /// <returns>return an enumerable of game progress on platform Dtos</returns>
         [HttpGet("{gameId}/gameprogressesonplatform")]
         public async Task<ActionResult<IEnumerable<GameProgressOnPlatformDto>>> GetAllGameProgressesOfASpecificGame(int gameId)
         {
@@ -79,6 +93,12 @@ namespace DemoWebApiProject.Controllers
             return Ok(dtoResult);
         }
 
+        /// <summary>
+        /// Get one specific game progress on platform subclass for a certain game, by game ID and gameProgressOnPlatformId. This API will return 404 if the gameProgressOnPlatformId doesn't match with the game ID
+        /// </summary>
+        /// <param name="gameId">The game ID is required</param>
+        /// <param name="gameProgressOnPlatformId">The gameProgressOnPlatformId is required</param>
+        /// <returns>return a game progress on platform Dto</returns>
         [HttpGet("{gameId}/gameprogressesonplatform/{gameProgressOnPlatformId}", Name = "GetASpecificGameProgressOfASpecificGame")]
         public async Task<ActionResult<GameProgressOnPlatformDto>> GetASpecificGameProgressOfASpecificGame(int gameId, int gameProgressOnPlatformId)
         {
@@ -143,6 +163,11 @@ namespace DemoWebApiProject.Controllers
         //        createdGameProgressOnPlatformDto);
         //}
 
+        /// <summary>
+        /// Post a new gameProgressOnPlatformDto to the database. This API will read the Dto content and decide which Game Progress entity this gameProgressOnPlatformDto belongs to. And update the database.
+        /// </summary>
+        /// <param name="gameProgressOnPlatformDto">The gameProgressOnPlatformDto to be created</param>
+        /// <returns>returns the gameProgressOnPlatformDto to be created</returns>
         [HttpPost("gameprogressesonplatform")]
         public async Task<ActionResult<GameProgressOnPlatformDto>> CreateAGameProgressForASpecificGame(GameProgressOnPlatformDto gameProgressOnPlatformDto)
         {
@@ -165,6 +190,12 @@ namespace DemoWebApiProject.Controllers
                 createdGameProgressOnPlatformDto);
         }
 
+        /// <summary>
+        /// Delete a certain gameProgressOnPlatform record from the database. This API will return 404 if the gameProgressOnPlatformId doesn't match with the game ID
+        /// </summary>
+        /// <param name="gameId">The game ID is required</param>
+        /// <param name="gameProgressOnPlatformId">The gameProgressOnPlatformId is required</param>
+        /// <returns>Will return a 204 status code if the deletion is successful</returns>
         [HttpDelete("{gameId}/gameprogressesonplatform/{gameProgressOnPlatformId}")]
         public async Task<ActionResult> DeleteAGameProgressForASpecificGame(int gameId, int gameProgressOnPlatformId)
         {
@@ -183,6 +214,10 @@ namespace DemoWebApiProject.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Delete multiple gameProgressOnPlatform recorsd from the database
+        /// </summary>
+        /// <returns>Will return a 204 status code if no Internal Servicer Error is found</returns>
         [HttpDelete("gameprogressesonplatform")]
         public async Task<ActionResult> DeleteMultipleGameProgresses(int startGameId, int endGameId)
         {

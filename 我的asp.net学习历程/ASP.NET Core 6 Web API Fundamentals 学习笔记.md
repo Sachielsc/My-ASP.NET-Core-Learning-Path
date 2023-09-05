@@ -13,6 +13,9 @@ Object-Relational Mapping is a technique the lets you query and manipulate data 
 - [Database providers](https://learn.microsoft.com/en-us/ef/core/providers/?tabs=dotnet-core-cli)
 - Two approaches to start: code-first and database-first. Since I don't have a database, I will start with the code-first approach
 
+## Clearing up the terminology confusion of api documentation
+OpenAPI specification and swagger specification are the same thing, OpenAPI specification is the preferred term.
+
 ### What is DTO?
 DTO stands for "Data Transfer Object." It is a design pattern commonly used in software development, especially in applications that involve the exchange of data between different layers or components of a system. The main purpose of a DTO is to encapsulate and transfer data between different parts of a program, often across different boundaries like network communication, service layers, or between application layers.
 

@@ -1,5 +1,4 @@
 using DemoWebApiProject.DbContexts;
-using DemoWebApiProject.MockData;
 using DemoWebApiProject.Repositories;
 using DemoWebApiProject.Services;
 using Microsoft.EntityFrameworkCore;
@@ -25,9 +24,8 @@ builder.Host.UseSerilog();
 // Demo: Formatters and Content negotiation
 builder.Services.AddControllers().AddXmlDataContractSerializerFormatters();
 
-builder.Services.AddEndpointsApiExplorer();
-
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 #if DEBUG
