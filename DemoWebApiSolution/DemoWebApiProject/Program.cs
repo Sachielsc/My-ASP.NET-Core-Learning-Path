@@ -26,7 +26,12 @@ builder.Services.AddControllers().AddXmlDataContractSerializerFormatters();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(setupAction =>
+{
+    // I prefer to hard code this path
+    var xmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, "APIDocumentation\\DemoWebApiProject.xml");
+    setupAction.IncludeXmlComments(xmlCommentsFullPath);
+});
 
 #if DEBUG
 builder.Services.AddTransient<IDummyCustomizedServices, DummyCustomizedServicesLocal>();
