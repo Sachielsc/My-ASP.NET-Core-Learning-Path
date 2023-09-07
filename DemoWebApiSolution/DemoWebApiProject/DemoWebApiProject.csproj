@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <DocumentationFile>APIDocumentation/DemoWebApiProject.xml</DocumentationFile>
+    <!--This is not necessary, as the Program.cs will look for this file from the bin folder--> <DocumentationFile>APIDocumentation/DemoWebApiProject.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

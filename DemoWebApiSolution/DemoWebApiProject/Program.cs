@@ -3,6 +3,7 @@ using DemoWebApiProject.Repositories;
 using DemoWebApiProject.Services;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,8 +29,8 @@ builder.Services.AddControllers().AddXmlDataContractSerializerFormatters();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(setupAction =>
 {
-    // I prefer to hard code this path
-    var xmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, "APIDocumentation\\DemoWebApiProject.xml");
+    var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+    var xmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
     setupAction.IncludeXmlComments(xmlCommentsFullPath);
 });
 

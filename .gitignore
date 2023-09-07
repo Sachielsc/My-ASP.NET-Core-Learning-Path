@@ -257,6 +257,9 @@ ServiceFabricBackup/
 # Microsoft Fakes
 FakesAssemblies/
 
+# auto-generated api documentations
+**/APIDocumentation/
+
 # GhostDoc plugin setting file
 *.GhostDoc.xml
 
