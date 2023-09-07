@@ -23,3 +23,7 @@
 ### securing your api
 ### Versioning and documenting your api
 - versioning
+
+# ASP.NET Core 6 Web API Deep Dive by Kevin Dockx
+## My practise progress link
+[Click here](https://app.pluralsight.com/course-player?clipId=419e110c-ab4b-4582-9cee-7a2d47e2eb66)
