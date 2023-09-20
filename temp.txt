@@ -1,1 +1,21 @@
-https://app.pluralsight.com/course-player?clipId=419e110c-ab4b-4582-9cee-7a2d47e2eb66
+# Monitoring
+## On-Premises
+### Prometheus
+### Grafana
+## Cloud
+### Datadog
+
+# Tracing
+## On-Premises
+### OpenTelemetry
+Use OpenTelemetry to instrument, generate, collect, and export telemetry data (metrics, logs, and traces)
+
+# Alerting
+## On-Premises
+### Zabbix
+
+# To be added somewhere enables
+## what does a test framework can provide us?
+- validations
+- test runners
+- Code reusability and scalability: A test framework can allow you to reuse existing code. So i can use their libraries and modules and don't have to reinvent the wheel
