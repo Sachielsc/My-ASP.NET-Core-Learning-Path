@@ -6,6 +6,14 @@
 ## Rounting
 Routing matches a request URI to an action on a controller
 
+## About Kertrel and other servers
+Kertrel is the default http server for Asp.Net Core application
+IIS / Nginx / Apache are the reverse proxy servers in production
+![ASP.net core application workflow](../docs/1.png)
+
+## About middlewares
+Middleware is a component that is assembled into application pipeline to handle requests and responses.
+
 ## ORM
 Object-Relational Mapping is a technique the lets you query and manipulate data from a database using an object-oriented paradigm
 
