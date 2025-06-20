@@ -474,3 +474,18 @@ To specify whether a project compiles into a DLL or an EXE, you configure the pr
 For a class library (DLL), you typically set `<OutputType>` to "Library." For an executable program (EXE), you set it to "Exe."
 
 After compiling, you'll find the resulting DLL or EXE file in the project's output directory, usually within the "bin" folder of your project's directory. This file contains the compiled code and metadata that can be used by other programs or assemblies, depending on its type.
+
+## In a Azure DevOps pipeline, i can use "NuGet push" to create an artifact, or i can use "PublishBuildArtifacts@1" to create an artifact</br>What's the difference between "push" and "publish" in the pipeline?
+In Azure DevOps pipelines, "NuGet push" and "PublishBuildArtifacts" are two different tasks used for different purposes, and they serve distinct functions in the pipeline.
+
+1. **NuGet Push**:
+   - **Purpose**: This task is primarily used for publishing NuGet packages to a NuGet feed, such as Azure Artifacts, a private feed, or a public feed like nuget.org.
+   - **Typical Usage**: You would use "NuGet push" when you want to publish your compiled libraries or packages (usually DLLs) to a NuGet repository so that other projects or developers can consume them as dependencies.
+   - **Artifact Type**: It doesn't create a build artifact in the same way "PublishBuildArtifacts" does. Instead, it publishes NuGet packages to a repository.
+
+2. **PublishBuildArtifacts**:
+   - **Purpose**: This task is used for creating and publishing build artifacts that are not NuGet packages. It is typically used to store files, binaries, build outputs, and other artifacts generated during your build and release process.
+   - **Typical Usage**: You would use "PublishBuildArtifacts" when you need to share files or artifacts (e.g., executables, configuration files, scripts, etc.) between different stages or jobs within your pipeline or when you want to make them available for download from Azure DevOps.
+   - **Artifact Type**: It creates a build artifact in the form of a zip file or a directory structure, which can be published and downloaded within Azure DevOps or accessed using REST APIs.
+
+In summary, the key difference between "NuGet push" and "PublishBuildArtifacts" is in their purposes and the type of artifacts they handle. "NuGet push" is specifically for publishing NuGet packages to a NuGet feed, while "PublishBuildArtifacts" is for creating and publishing general build artifacts, which can be files, directories, or any other outputs of your build process. The choice between them depends on whether you're dealing with NuGet packages or other types of build artifacts in your pipeline.
